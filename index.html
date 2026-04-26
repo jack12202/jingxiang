@@ -1,1578 +1,854 @@
 <!DOCTYPE html>
-
-<html lang="zh">
+<html lang="zh-CN">
 <head>
-<meta charset="utf-8"/>
-<meta content="GPT Plus 官方代充平台，提供稳定安全的GPT-5升级服务，正规iOS通道，封号包赔。" name="description"/>
-<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
-<title>GPT4.pro - GPT Plus 官方代充平台 | 2025最新升级通道 🛡️</title>
-<style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ChatGPT 镜像服务，支持 GPT 对话与 GPT Image 2 生图，提供天卡、周卡、月卡套餐。">
+  <title>ChatGPT 镜像服务 | GPT 对话 + GPT Image 2 生图</title>
+  <style>
     :root {
-      --primary: #14b8a6;      /* 旗舰青（Teal） */
-      --primary-dark: #0f766e; /* 深青强调 */
-      --accent: #2dd4bf;       /* 亮青点缀 */
-      --gray-300: #cbd5e1;
-      --gray-500: #64748b;
-      --radius: 22px;
-
-      /* Brand Colors (Teal/Cyan Theme) */
-      --brand-500:#14b8a6; /* 主色 */
-      --brand-600:#0d9488; /* hover/强调 */
-      --brand-glass: rgba(20, 184, 166, 0.18); /* 玻璃条/轻底 */
-      --brand-outline: rgba(45, 212, 191, 0.45);
-      --brand-outline-strong: rgba(45, 212, 191, 0.65);
-      --brand-shadow-soft: rgba(20, 184, 166, 0.18);
-      --brand-shadow-strong: rgba(20, 184, 166, 0.35);
-      --brand-tint: rgba(45, 212, 191, 0.12);
-      --brand-tint-strong: rgba(45, 212, 191, 0.22);
-
-      /* Neutral */
-      --overlay:#0B1220;                    /* 深夜蓝弹窗/底栏背景 */
-      --surface-glass: rgba(255,255,255,.10);/* 玻璃描边 */
-      --white-85: rgba(255,255,255,.85);     /* 玻璃白填充 */
-      --text-strong:#ffffff;                 /* 浅色文字 */
-      --text-muted: rgba(255,255,255,.78);
+      --bg: #071314;
+      --panel: rgba(10, 25, 28, 0.82);
+      --panel-strong: rgba(12, 35, 38, 0.92);
+      --line: rgba(207, 250, 254, 0.17);
+      --line-strong: rgba(94, 234, 212, 0.36);
+      --text: #f8fafc;
+      --muted: #b8c9cc;
+      --soft: #d7fffa;
+      --brand: #2dd4bf;
+      --brand-strong: #14b8a6;
+      --warning: #fde68a;
+      --danger: #fecaca;
+      --radius: 18px;
+      --shadow: 0 22px 70px rgba(0, 0, 0, 0.34);
     }
 
-    /* 背景渐变 & 全局排版 */
     * {
       box-sizing: border-box;
     }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont,
-        "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-      background:
-        /* 大散景光斑 */
-        radial-gradient(260px 180px at 18% 22%, rgba(20,184,166,.12), transparent 70%),
-        radial-gradient(220px 160px at 68% 16%, rgba(45,212,191,.08), transparent 72%),
-        radial-gradient(180px 140px at 82% 42%, rgba(255,255,255,.05), transparent 75%),
-        /* 深青蓝底色 */
-        linear-gradient(135deg, #042f2e 0%, #0f172a 45%, #020617 100%);
       min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 26px 12px 120px; /* 底部留出空间，允许轻微滚动看到底部内容 */
-      color: #fff;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", Arial, sans-serif;
+      color: var(--text);
+      background:
+        linear-gradient(115deg, rgba(45, 212, 191, 0.12), transparent 32%),
+        linear-gradient(245deg, rgba(125, 211, 252, 0.12), transparent 30%),
+        linear-gradient(180deg, #071314 0%, #0b1d21 48%, #040809 100%);
+      padding: 22px 14px 112px;
+      -webkit-font-smoothing: antialiased;
       -webkit-text-size-adjust: 100%;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button,
+    a.button {
+      font: inherit;
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* 中心卡片 */
-    .card {
-      width: 100%;
-      max-width: 620px;
-      background:
-        linear-gradient(180deg, rgba(20,184,166,.12) 0%, rgba(45,212,191,.05) 100%),
-        rgba(15, 23, 42, 0.85);
-      border-radius: var(--radius);
-      box-shadow: 0 6px 36px rgba(0, 0, 0, 0.20);
-      backdrop-filter: blur(16px) saturate(130%);
-      -webkit-backdrop-filter: blur(16px) saturate(130%);
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,.35);
-      position: relative;
+    .page {
+      width: min(980px, 100%);
+      margin: 0 auto;
     }
-  /* 金属渐变描边 */
-  .card::before{
-    content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
-    border: 1px solid rgba(255,255,255,.45);
-  }
-  .card::after{
-    content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
-    padding:1px; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor; mask-composite: exclude;
-    background: linear-gradient(135deg, rgba(45,212,191,.9), rgba(20,184,166,.75), rgba(13,148,136,.85));
-  }
 
-    /* 卡片 – 顶部彩条、标题、徽章 */
-    .card-header {
-      padding: 48px 40px 32px;
+    .shell {
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.035));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      color: #041010;
+      font-weight: 900;
+      background: linear-gradient(135deg, #99f6e4 0%, #2dd4bf 58%, #38bdf8 100%);
+      box-shadow: 0 12px 32px rgba(45, 212, 191, 0.24);
+      flex: 0 0 auto;
+    }
+
+    .brand-text strong {
+      display: block;
+      font-size: 0.98rem;
+      letter-spacing: 0;
+    }
+
+    .brand-text span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.78rem;
+      margin-top: 2px;
+    }
+
+    .top-link {
+      color: #ccfbf1;
+      text-decoration: none;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 9px 13px;
+      font-size: 0.86rem;
+      white-space: nowrap;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .hero {
+      padding: 42px 28px 26px;
       text-align: center;
     }
-    .card-header h1 {  margin-bottom:6px;
-      font-size: 1.8rem;
-      margin: 0 0 8px;
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 7px 13px;
+      border-radius: 999px;
+      border: 1px solid var(--line-strong);
+      color: #ccfbf1;
+      background: rgba(20, 184, 166, 0.12);
+      font-size: 0.86rem;
       font-weight: 700;
     }
-    .brand-badge{
-      display:flex; align-items:center; justify-content:center; gap:12px;
-      margin: 2px auto 12px;
-      padding: 0;
-      border-radius: 0;
-      background: transparent;
-      border: 0;
-      box-shadow: none;
-      width: fit-content;
+
+    h1 {
+      margin: 18px auto 12px;
+      max-width: 760px;
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 1.08;
+      letter-spacing: 0;
     }
-    .brand-icon{ width: 32px; height: 32px; display:block; }
-    .brand-name{ font-weight:900; color:#fff; letter-spacing:.02em; font-size:1.05rem; }
-    .brand-sub{ font-size:.85rem; color:#ccfbf1; opacity:.85; margin-left:6px; }
-    /* Hero 组合 */
-    .hero{ display:flex; flex-direction:column; align-items:center; gap:8px; }
-    .hero h1{ margin: 2px 0 0; }
-    .hero-divider{ width:min(440px,88%); height:1px; background: rgba(255,255,255,.12); margin: 2px 0 0; border-radius:1px; }
-    .hero .notice-bar-top{ margin: 4px 0 0; font-size:.85rem; color:#ccfbf1; }
-    .badges {
+
+    .lead {
+      max-width: 690px;
+      margin: 0 auto;
+      color: #d7e5e7;
+      font-size: 1.02rem;
+      line-height: 1.8;
+    }
+
+    .quick-points {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
+      gap: 9px;
+      margin: 22px auto 0;
+    }
+
+    .pill {
+      min-height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 12px;
+      border-radius: 999px;
+      color: #ecfeff;
+      background: rgba(255, 255, 255, 0.075);
+      border: 1px solid var(--line);
+      font-size: 0.84rem;
+      white-space: nowrap;
+    }
+
+    .section {
+      padding: 24px 28px;
+    }
+
+    .section + .section {
+      border-top: 1px solid var(--line);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 15px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 1.25rem;
+      letter-spacing: 0;
+    }
+
+    .section-title p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      text-align: right;
+    }
+
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .plan {
+      position: relative;
+      min-height: 286px;
+      padding: 20px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--panel);
+      display: flex;
+      flex-direction: column;
       gap: 12px;
     }
-      .badge {
-    padding: 4px 8px;
-    font-size: 0.7rem;
-    font-weight: 600;
-    border-radius: 9999px;
-    background: var(--white-85);
-    color:#0f172a;
-    border: 1px solid var(--surface-glass);
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    box-shadow: none;
-    width: 95px;
-    justify-content: center;
-    white-space: nowrap;
-  }
 
-    /* 指标区域 */
-    .stats {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 24px;
-      margin: 36px 0 12px;
+    .plan.featured {
+      border-color: rgba(45, 212, 191, 0.62);
+      background:
+        linear-gradient(180deg, rgba(20, 184, 166, 0.20), rgba(12, 35, 38, 0.92)),
+        var(--panel-strong);
+      box-shadow: 0 16px 44px rgba(20, 184, 166, 0.16);
     }
-    .stat {
-      flex: 1 1 140px;
-      text-align: center;
-    }
-    .stat-value {
-      font-size:1rem;
-      font-weight: 800;
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-    .stat-label {
+
+    .tag {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      border-radius: 999px;
+      padding: 5px 9px;
+      color: #052f2b;
+      background: #99f6e4;
       font-size: 0.75rem;
-      color: var(--gray-300);
+      font-weight: 900;
     }
 
-    /* CTA 按钮 */
-    .btn {
-      display: block;
-      width: 100%;
-      margin-top: 26px;
-      padding: 16px 0;
+    .plan-name {
       font-size: 1.05rem;
-      font-weight: 700;
-      color: #fff;
-      background: linear-gradient(135deg, var(--brand-600) 0%, var(--brand-500) 100%);
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: background 0.25s, box-shadow .25s, transform .15s;
+      font-weight: 900;
     }
-    .btn:hover {
-      filter: brightness(1.06);
-      box-shadow: 0 8px 24px rgba(20, 184, 166, 0.35);
+
+    .price {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-top: 3px;
+    }
+
+    .price strong {
+      font-size: 2.4rem;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .price span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .plan-desc {
+      min-height: 44px;
+      margin: 0;
+      color: #cbdde0;
+      line-height: 1.55;
+      font-size: 0.92rem;
+    }
+
+    .plan ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      color: #e5f6f6;
+      font-size: 0.88rem;
+    }
+
+    .plan li::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      margin-right: 8px;
+      border-radius: 999px;
+      background: var(--brand);
+      vertical-align: 2px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      width: 100%;
+      margin-top: auto;
+      border: 0;
+      border-radius: 13px;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: 900;
+      color: #031111;
+      background: linear-gradient(135deg, #a7f3d0 0%, #2dd4bf 58%, #38bdf8 100%);
+      box-shadow: 0 12px 28px rgba(20, 184, 166, 0.18);
+    }
+
+    .button:hover {
+      filter: brightness(1.05);
       transform: translateY(-1px);
     }
 
-    /* 页脚 */
-    footer {
-      text-align: center;
-      font-size: 0.7rem;
-      color: var(--gray-300);
-      padding: 18px 0 24px;
-    }
-
-    /* 小屏优化 */
-    @media (max-width: 480px) {
-      .card-header { padding: 40px 24px 24px; }
-      
-      .price { margin-top: 8px; gap: 6px; }
-      .price-val { font-size: 2.2rem; }
-      .price-tag { font-size: 0.75rem; padding: 3px 8px; }
-      
-
-
-
-
-.actions-gap{ height: 18px; }
-.actions-gap-sm{ height: 12px; }
-.secondary-actions.secondary-between{
-  display:flex;
-  justify-content:center;
-}
-.secondary-actions.secondary-between .btn-ai{
-  width: min(460px, 100%);
-  padding: .62rem 1.0rem;
-  border-radius: 14px;
-  background: rgba(255,255,255,.04);
-  border: 1px dashed rgba(45,212,191,.40);
-  box-shadow: none;
-}
-.secondary-actions.secondary-between .btn-ai:hover{
-  background: rgba(255,255,255,.06);
-  border-color: rgba(45,212,191,.65);
-  transform: translateY(-1px);
-}
-.secondary-actions.secondary-between .btn-ai .sub{
-  font-size:.76rem;
-  opacity:.78;
-}
-
-
-      .button-group { flex-direction: column; gap: 8px; margin: 20px 0 8px; }
-      .button-group .btn-buy,
-      .button-group .btn-recharge { margin: 0; padding: 16px 0; font-size: 1.05rem; }
-      
-      .steps-mini { gap: 6px 8px; margin: 8px 0 6px; }
-      .step-pill { font-size: 0.75rem; padding: 5px 8px; }
-      .steps-link { font-size: 0.75rem; margin-left: 4px; }
-      
-      .badges { gap: 8px; margin-top: 16px; }
-      .badge { font-size: 0.7rem; padding: 3px 8px; }
-      
-      .stats { gap: 16px; margin: 24px 0 8px; }
-      .stat-value { font-size: 0.9rem; }
-      .stat-label { font-size: 0.7rem; }
-    }
-  
-  /* ======== 价格 + CTA ======== */
-  .price{ margin-top:4px; display:flex; justify-content:center; align-items:flex-end; gap:8px; 
-    display:flex;
-    justify-content:center;
-    align-items:flex-end;
-    gap:8px;
-    margin-top:6px;
-  }
-  .price-val{
-    font-size:2.4rem;
-    font-weight:900;
-    line-height:1;
-  }
-  .price-tag{
-    font-size:.8rem;
-    font-weight:600;
-    padding:4px 10px;
-    border-radius:9999px;
-    background: rgba(233,196,106,.16);
-    color:#fff;
-    border: 1px solid var(--surface-glass);
-  }
-
-  .btn-buy{
-    width:100%;
-    margin:22px 0 6px;
-    padding:18px 0;
-    font-size:1.12rem;
-    font-weight:800;
-    letter-spacing:.02em;
-    color:#fff;
-    background: linear-gradient(180deg, #2dd4bf 0%, #14b8a6 100%); /* 青色渐变 */
-    border:none;
-    border-radius:14px;
-    cursor:pointer;
-    transition: transform .15s ease, filter .2s ease;
-    box-shadow:0 6px 14px var(--brand-shadow-soft);
-    animation: none;
-  }
-  .btn-buy:hover{ filter: brightness(1.05); transform: translateY(-1px); }
-  .btn-buy:active{ transform: translateY(0); }
-  .btn-buy:focus-visible{ outline: 3px solid var(--brand-500); outline-offset: 2px; }
-
-  /* 按钮组布局 */
-  .button-group{
-    display: flex;
-    gap: 12px;
-    margin: 22px 0 8px;
-  }
-  .button-group .btn-buy{
-    flex: 1.2;
-    margin: 0;
-  }
-  .button-group .btn-recharge{
-    flex: 1;
-    margin: 0;
-  }
-
-  /* 购买说明文字 */
-  .buy-note{
-    margin: 8px 0 4px;
-    text-align: center;
-    font-size: .85rem;
-    color: rgba(255,255,255,.85);
-    opacity: .9;
-  }
-
-  /* 进入充值系统按钮 */
-  .btn-recharge{
-    width:100%;
-    margin: 16px 0 6px;
-    padding: 14px 0;
-    font-size: 1rem;
-    font-weight: 700;
-    letter-spacing:.02em;
-    color: #fff;
-    background: linear-gradient(135deg, rgba(255,255,255,.15) 0%, rgba(255,255,255,.08) 100%);
-    border: 1px solid rgba(255,255,255,.25);
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all .2s ease;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-  }
-  .btn-recharge:hover{ 
-    background: linear-gradient(135deg, rgba(255,255,255,.22) 0%, rgba(255,255,255,.12) 100%);
-    border-color: rgba(255,255,255,.35);
-    transform: translateY(-1px);
-  }
-  .btn-recharge:active{ transform: translateY(0); }
-  .btn-recharge:focus-visible{ outline: 2px solid rgba(255,255,255,.5); outline-offset: 2px; }
-
-  /* —— 说明文字 —— */
-  .note-weak{
-    margin:10px 0 4px;
-    text-align:center;
-    font-size:.82rem;
-    color:#ccfbf1;
-    opacity:.95;
-  }
-  .note-link{
-    color:#99f6e4;
-    text-decoration:underline;
-  }
-  
-
-  .cs-drawer{
-    position:fixed; right:22px; bottom:92px;
-    width:260px; background:#fff; color:#111;
-    border-radius:14px; box-shadow:0 12px 36px rgba(0,0,0,.22);
-    transform:translateY(20px); opacity:0; pointer-events:none;
-    transition:all .2s ease;
-  }
-  .cs-drawer.open{ transform:translateY(0); opacity:1; pointer-events:auto; }
-  .cs-head{
-    display:flex; justify-content:space-between; align-items:center;
-    padding:12px 14px; border-bottom:1px solid #eee;
-  }
-  .cs-head button{ background:transparent; border:none; font-size:16px; cursor:pointer; }
-  .cs-body{ padding:12px 14px 16px; font-size:.92rem; }
-  .cs-body p{ margin:10px 0; }
-  .copy{
-    margin-left:8px; padding:4px 8px; font-size:.78rem;
-    border-radius:8px; border:1px solid var(--brand-outline); background: var(--brand-tint); color:#0f172a; cursor:pointer;
-  }
-  .qq-toggle-btn{
-    width:100%; margin-top:8px; padding:6px 8px; font-size:.8rem;
-    border:1px solid var(--brand-outline); background: var(--brand-tint); border-radius:6px;
-    cursor:pointer; color:#0f172a; transition:background .2s;
-  }
-  .qq-toggle-btn:hover{ background: var(--brand-tint-strong); }
-  .qq-content{ margin-top:8px; }
-  ./* removed:qr */{ display:block; width:100%; border-radius:10px; margin-top:8px; }
-  
-
-  /* ===== CTA 强化 ===== */
-  @keyframes ctaPulse { 0%{opacity:1} 100%{opacity:1} }
-
-  /* ===== 移动端浮窗 CTA ===== */
-  .cta-sticky{
-    position:fixed; left:16px; right:16px; bottom:16px; z-index:50;
-    display:none;
-    text-align:center; font-weight:800; font-size:1.02rem; color:#fff;
-    padding:14px 0; border-radius:14px; text-decoration:none;
-    background: linear-gradient(180deg, #2dd4bf 0%, #14b8a6 100%);
-    box-shadow:0 6px 14px var(--brand-shadow-soft);
-  }
-  @media (max-width: 640px){ .cta-sticky{ display:none; } }
-  .steps-mini{
-    display:flex; flex-wrap:wrap; gap:8px 10px; justify-content:center;
-    align-items:center; margin:8px 0 4px;
-  }
-  .step-pill{
-    font-size:.78rem; font-weight:600; color:#1f2937;
-    padding:6px 10px; border-radius:9999px;
-    background: var(--white-85); border:1px solid var(--surface-glass);
-    box-shadow: none;
-    width: 95px; text-align: center;
-    display: inline-block;
-    white-space: nowrap;
-  }
-  .steps-link{
-    margin-left:6px; font-size:.78rem; color:#aef3ff; text-decoration:underline;
-    text-underline-offset:2px;
-  }
-  .flow-head{
-    display:flex; justify-content:space-between; align-items:center;
-    padding:12px 16px; border-bottom:1px solid #eee;
-  }
-  .flow-head button{ background:transparent; border:none; font-size:18px; cursor:pointer; }
-  .flow-body{ padding:14px 18px 18px; }
-  .flow-body ol{ margin:0 0 6px 18px; }
-  .flow-body li{ margin:8px 0; line-height:1.6; }
-  .tips{ margin-top:6px; font-size:.9rem; color:#6b7280; }
-  .tips.highlight{ 
-    background: var(--brand-glass);
-    color: var(--text-strong);
-    padding: 12px 16px;
-    border-radius: 10px;
-    border: 1px solid var(--surface-glass);
-    font-weight: 600;
-    text-align: center;
-    margin: 16px 0;
-    box-shadow: none;
-  }
-  /* —— 优化对齐：文字左对齐，椭圆按钮对齐 —— */
-  .buy-notes {
-    list-style: none;
-    padding: 0;
-    margin: 12px auto;
-    max-width: 360px;
-    display: block;
-    text-align: left;
-  }
-  .buy-notes li {
-    display: flex;
-    align-items: center;
-    margin: 6px 0;
-    font-size: 0.9rem;
-    color: #d6f7ff;
-    opacity: 0.9;
-    position: relative;
-    padding-left: 1.25rem;
-  }
-  .buy-notes li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.55em;
-    width: 0.45rem;
-    height: 0.45rem;
-    border-radius: 50%;
-    background: #fff;
-  }
-  .buy-notes li.highlight {
-    background: var(--brand-glass);
-    color: var(--text-strong);
-    padding: 12px 16px;
-    border-radius: 10px;
-    border: 1px solid var(--surface-glass);
-    font-weight: 600;
-    margin: 16px 0;
-    box-shadow: none;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  .buy-notes li.highlight:hover {
-    transform: translateY(-1px);
-    box-shadow: none;
-  }
-  .buy-notes li.highlight::before {
-    content: '💬';
-    color: var(--brand-500);
-  }
-  .flow-support .support-title {
-    font-size:0.92rem; font-weight:600; color:#111827; margin-bottom:6px;
-  }
-  .flow-support p {
-    margin:4px 0; font-size:0.88rem; color:#374151;
-  }
-  .flow-support .copy-btn {
-    margin-left:8px; padding:2px 6px; font-size:0.78rem;
-    border:1px solid rgba(20,184,166,.45); background: rgba(20,184,166,.12); color:#fff; border-radius:6px;
-    cursor:pointer; transition:background .2s;
-  }
-  .flow-support .copy-btn:hover { background: rgba(20,184,166,.22); }
-  .flow-qq-toggle-btn{
-    width:100%; margin-top:8px; padding:6px 8px; font-size:.8rem;
-    border:1px solid rgba(20,184,166,.45); background: rgba(20,184,166,.12); border-radius:6px;
-    cursor:pointer; color:#fff; transition:background .2s;
-  }
-  .flow-qq-toggle-btn:hover{ background: rgba(20,184,166,.22); }
-  .flow-qq-content{ margin-top:8px; }
-  /* 成本暴涨通知样式 */
-  .cost-notice {
-    background: var(--brand-glass);
-    border: 2px solid var(--surface-glass);
-    border-radius: 16px;
-    padding: 20px 24px;
-    margin: 20px 0;
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    box-shadow: none;
-    animation: costNoticePulse 3s ease-in-out infinite;
-  }
-  @keyframes costNoticePulse {
-    0%, 100% { 
+    .button.secondary {
+      color: #ecfeff;
+      border: 1px solid var(--line-strong);
+      background: rgba(255, 255, 255, 0.06);
       box-shadow: none;
-      transform: scale(1);
     }
-    50% { 
-      box-shadow: none;
-      transform: scale(1.01);
-    }
-  }
-  .cost-notice-icon {
-    font-size: 2rem;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .cost-notice-content {
-    color: var(--text-strong);
-    flex: 1;
-  }
-  .cost-notice-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 12px;
-    color: #ccfbf1;
-  }
-  .cost-notice-main {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .cost-notice-item {
-    font-size: 0.95rem;
-    line-height: 1.4;
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-  }
-  .cost-notice-label {
-    font-weight: 600;
-    color: var(--text-strong);
-    flex-shrink: 0;
-    min-width: 80px;
-  }
-  .cost-notice-item strong {
-    color: #dc2626;
-    font-weight: 700;
-  }
-  .copy-inline {
-    background: rgba(255, 255, 255, 0.2);
-    color: var(--text-strong);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 3px 6px;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    margin-left: 8px;
-    flex-shrink: 0;
-  }
-  .copy-inline:hover {
-    background: rgba(255, 255, 255, 0.3);
-  }
 
+    .notice-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
 
-  /* 手机端 */
-  @media (max-width: 640px) {
-    .cost-notice {
-      padding: 12px 16px;
-      margin: 12px 0;
-      gap: 8px;
-      flex-direction: column;
-      text-align: center;
+    .notice {
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.055);
+      padding: 18px;
     }
-    .cost-notice-icon {
-      font-size: 1.5rem;
-      margin: 0 auto 6px;
+
+    .notice h3 {
+      margin: 0 0 9px;
+      font-size: 1rem;
     }
-    .cost-notice-content {
-      width: 100%;
+
+    .notice p {
+      margin: 0;
+      color: #d5e7e9;
+      font-size: 0.93rem;
+      line-height: 1.75;
     }
-    .cost-notice-title {
-      font-size: 0.95rem;
-      margin-bottom: 8px;
-      text-align: center;
+
+    .notice.warning {
+      border-color: rgba(253, 230, 138, 0.28);
+      background: rgba(253, 230, 138, 0.08);
     }
-    .cost-notice-main {
-      gap: 6px;
+
+    .notice.warning h3 {
+      color: var(--warning);
     }
-    .cost-notice-item {
-      font-size: 0.85rem;
-      flex-direction: row;
-      align-items: flex-start;
-      gap: 6px;
-      text-align: left;
-      padding: 3px 0;
+
+    .notice.official {
+      border-color: rgba(56, 189, 248, 0.26);
+      background: rgba(56, 189, 248, 0.08);
     }
-    .cost-notice-label {
-      min-width: 70px;
-      font-size: 0.8rem;
-      flex-shrink: 0;
+
+    .notice.official h3 {
+      color: #bae6fd;
     }
-    .copy-inline {
-      margin-left: 4px;
-      padding: 2px 4px;
-      font-size: 0.65rem;
+
+    .official-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
     }
-  }
-  
-  /* 超小屏幕优化 */
-  @media (max-width: 375px) {
-    .cost-notice {
-      padding: 10px 14px;
-      margin: 10px 0;
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      counter-reset: step;
     }
-    .cost-notice-title {
-      font-size: 0.9rem;
+
+    .step {
+      min-height: 118px;
+      padding: 16px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.05);
+      counter-increment: step;
+    }
+
+    .step::before {
+      content: counter(step);
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      margin-bottom: 12px;
+      border-radius: 10px;
+      color: #031111;
+      background: var(--brand);
+      font-weight: 900;
+    }
+
+    .step strong {
+      display: block;
       margin-bottom: 6px;
+      font-size: 0.96rem;
     }
-    .cost-notice-item {
+
+    .step span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    .feature-list {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .feature {
+      min-height: 104px;
+      padding: 16px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .feature strong {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 0.95rem;
+    }
+
+    .feature span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    .support {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.055);
+      padding: 18px;
+    }
+
+    .support p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .support strong {
+      font-size: 1.05rem;
+    }
+
+    .support-actions {
+      display: flex;
+      gap: 10px;
+      flex: 0 0 auto;
+    }
+
+    .mini-button {
+      min-height: 42px;
+      padding: 0 14px;
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      color: #ecfeff;
+      background: rgba(255, 255, 255, 0.06);
+      cursor: pointer;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .footer {
+      padding: 18px 22px 24px;
+      border-top: 1px solid var(--line);
+      color: #9fb5b9;
+      text-align: center;
       font-size: 0.8rem;
-      flex-direction: row;
-      align-items: flex-start;
-      gap: 5px;
-      padding: 2px 0;
+      line-height: 1.6;
     }
-    .cost-notice-label {
-      min-width: 65px;
-      font-size: 0.75rem;
+
+    .sticky-bar {
+      position: fixed;
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+      z-index: 40;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: min(720px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 18px;
+      background: rgba(4, 12, 13, 0.86);
+      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.34);
+      backdrop-filter: blur(16px);
     }
-    .copy-inline {
-      margin-left: 3px;
-      padding: 1px 3px;
-      font-size: 0.6rem;
+
+    .sticky-text {
+      color: #e6fffb;
+      font-size: 0.88rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
-  }
 
-  .notice-bar-top{
-  margin: 6px auto 2px;
-  display:flex; align-items:center; justify-content:center;
-  max-width:520px;
-  padding:0; border-radius:0;
-  background: transparent;
-  color:#ccfbf1; font-weight:700; border: 0;
-  box-shadow: none;
-  font-size:.92rem;
-}
-.small-risk{
-  margin:8px 0 2px; text-align:center; color:rgba(255,255,255,.9);
-  font-size:.9rem;
-}
+    .sticky-bar .mini-button {
+      color: #031111;
+      background: var(--brand);
+      border-color: transparent;
+      flex: 0 0 auto;
+    }
 
-/* 底部公告条 + 弹窗（保持与现有风格兼容） */
-.sticky-note{
-  position:fixed; left:0; right:0; bottom:0; z-index:30;
-  display:flex; align-items:center; justify-content:center; gap:.8rem; flex-wrap:wrap;
-  padding:.7rem 1rem; background:rgba(255,255,255,.92);
-  border-top:1px solid rgba(0,0,0,.06); backdrop-filter:saturate(140%) blur(4px);
-  font-size:14px; color:#111;
-}
-  .sticky-note .cta-mini{
-  all:unset; cursor:pointer; font-weight:800; padding:.45rem .8rem; border-radius:10px;
-  background: linear-gradient(180deg, #2dd4bf 0%, #14b8a6 100%);
-  color:#fff; border:1px solid var(--brand-outline);
-}
-  .sticky-note .cta-outline{
-  all:unset; cursor:pointer; font-weight:700; padding:.42rem .75rem; border-radius:10px;
-  border:1px solid var(--brand-outline); color:#ccfbf1; background: var(--brand-tint);
-}
-.modal-mask{ position:fixed; inset:0; background:rgba(0,0,0,.5); display:none; align-items:center; justify-content:center; z-index:50; padding:16px; }
-.modal-mask.show{ display:flex; }
-.modal-card{ width:min(680px,96vw); background: linear-gradient(180deg, rgba(10,36,48,.92), rgba(9,30,40,.92)); color:#e6f7fb; border-radius:16px; padding:20px 20px 16px;
-  border:1px solid var(--brand-outline); box-shadow:0 20px 60px rgba(0,0,0,.35); backdrop-filter: blur(8px) saturate(120%); -webkit-backdrop-filter: blur(8px) saturate(120%); position:relative; }
-.modal-card::after{ content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; padding:1px; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; background: linear-gradient(135deg, rgba(45,212,191,.85), rgba(20,184,166,.75), rgba(13,148,136,.75)); }
-.modal-card h3{ margin:.2rem 0 1rem; font-size:20px }
-.modal-card p{ line-height:1.7; margin:.4rem 0 1rem }
-.modal-footer{ display:flex; justify-content:flex-end; }
-.modal-close{ position:absolute; transform:translate(650px,-10px); background:#111827; color:#fff; border:none; padding:.35rem .55rem; border-radius:8px; cursor:pointer; }
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 92px;
+      z-index: 100;
+      transform: translateX(-50%);
+      max-width: min(420px, 86vw);
+      padding: 11px 14px;
+      border-radius: 13px;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.82);
+      opacity: 0;
+      transition: opacity 0.18s ease;
+      text-align: center;
+      font-size: 0.9rem;
+      pointer-events: none;
+    }
 
-/* 细公告条（保持简洁） */
-.notice-bar-top{
-  margin: 6px auto 2px; display:flex; align-items:center; justify-content:center;
-  max-width:520px; padding:0; border-radius:0;
-  background: transparent;
-  color: #ccfbf1; font-weight:700; border: 0;
-  box-shadow: none; font-size:.92rem;
-}
-.small-risk{ margin:8px 0 2px; text-align:center; color:rgba(255,255,255,.9); font-size:.9rem; }
-/* 底部公告条（全宽） */
-.sticky-note{
-  position:fixed; left:0; right:0; bottom:0; z-index:30;
-  display:flex; align-items:center; justify-content:center; gap:.8rem; flex-wrap:wrap;
-  padding:.7rem 1rem; background:rgba(255,255,255,.92);
-  border-top:1px solid rgba(0,0,0,.06); backdrop-filter:saturate(140%) blur(4px);
-  font-size:14px; color:#111;
-}
-.sticky-note .cta-mini{
-  all:unset; cursor:pointer; font-weight:800; padding:.45rem .8rem; border-radius:10px;
-  background: linear-gradient(180deg, #2dd4bf 0%, #14b8a6 100%);
-  border:1px solid var(--brand-outline); color:#fff;
-}
-.sticky-note .cta-outline{
-  all:unset; cursor:pointer; font-weight:700; padding:.42rem .75rem; border-radius:10px;
-  border:1px solid var(--brand-outline); color:#ccfbf1; background: var(--brand-tint);
-}
-.help-close{ position:sticky; top:0; float:right; background:#111827; color:#fff; border:none; padding:.35rem .55rem; border-radius:8px; cursor:pointer; }
-.help-tabs{ display:flex; gap:.5rem; margin:.25rem 0 .75rem; }
-  .help-tabs .tab{
-  all:unset; cursor:pointer; padding:.48rem .8rem; border-radius:10px; font-weight:700;
-  color:#e5e7eb; border:1px solid rgba(20,184,166,.45); background: rgba(20,184,166,.12);
-}
-  .help-tabs .tab.active{ background: rgba(20,184,166,.24); border-color: rgba(20,184,166,.65); }
-.help-panels .panel{ display:none; }
-.help-panels .panel.active{ display:block; }
-.flow-steps{ padding-left:1.2rem; line-height:1.8; }
-.list{ padding-left:1.2rem; line-height:1.8; }
-.muted{ opacity:.8; }
-.visually-hidden{ position:absolute; width:1px; height:1px; margin:-1px; border:0; padding:0; clip:rect(0 0 0 0); overflow:hidden; }
-}
-/* 打开弹窗时禁止滚动 */
-.modal-open{ overflow:hidden; }
+    .toast.show {
+      opacity: 1;
+    }
 
+    @media (min-width: 781px) {
+      body {
+        padding-bottom: 36px;
+      }
 
-/* 统一“价格·涨价说明”弹窗：隐藏旧入口（全部并入统一弹窗） */
-/* 弹窗打开时，底部公告条降噪并禁点（小屏避免误触） */
-body.modal-open .sticky-note{ opacity:.6; pointer-events:none; }
-/* 打开弹窗时禁止页面滚动 */
-body.modal-open{ overflow:hidden; }
+      .sticky-bar {
+        display: none;
+      }
+    }
 
-/* 底部公告条（全宽居中） */
-.sticky-note{
-  position:fixed; left:0; right:0; bottom:0; z-index:30;
-  display:flex; align-items:center; justify-content:center; gap:.8rem; flex-wrap:wrap;
-  padding:.7rem 1rem; background:rgba(11,18,32,.90);
-  border-top:1px solid var(--surface-glass); backdrop-filter:saturate(140%) blur(4px);
-  font-size:14px; color:#fff;
-}
-.sticky-note .cta-mini{
-  all:unset; cursor:pointer; font-weight:700; padding:.42rem .75rem; border-radius:10px;
-  background: linear-gradient(180deg, #2dd4bf 0%, #14b8a6 100%);
-  border:1px solid var(--brand-outline-strong); color:#fff;
-}
-.sticky-note .cta-outline{
-  all:unset; cursor:pointer; font-weight:700; padding:.42rem .75rem; border-radius:10px;
-  border:1px solid var(--brand-outline); color:#fff; background: var(--brand-tint);
-}
+    @media (max-width: 780px) {
+      body {
+        padding: 12px 10px 106px;
+      }
 
-/* 价格·涨价说明 弹窗 */
-.modal-mask{ position:fixed; inset:0; background:rgba(0,0,0,.5); display:none; align-items:center; justify-content:center; z-index:70; padding:16px; }
-.modal-mask.show{ display:flex; }
-.modal-card{ width:min(720px,96vw); background: var(--overlay); color: var(--text-muted); border-radius:16px; padding:20px 20px 16px;
-  border:1px solid var(--surface-glass); box-shadow:0 20px 60px rgba(0,0,0,.4); outline:0; }
-.modal-close{ position:absolute; transform:translate(670px,-10px); background:#111827; color:#fff; border:none; padding:.35rem .55rem; border-radius:8px; cursor:pointer; }
-.help-tabs{ display:flex; gap:.5rem; margin:.5rem 0 1rem; flex-wrap:wrap; }
-.help-tabs .tab-btn{
-  all:unset; cursor:pointer; padding:.35rem .7rem; border-radius:10px; font-weight:700; color:#ccfbf1;
-  border:1px solid var(--brand-outline); background:var(--brand-tint);
-}
-.help-tabs .tab-btn.active{ color:#fff; background: var(--brand-tint-strong); border-color: var(--brand-outline-strong); }
-.tab-panel[hidden]{ display:none !important; }
-.tab-panel.active{ display:block; }
-.flow-steps{ padding-left:1.2rem; margin:.2rem 0 1rem }
-.hint{ opacity:.8; }
+      .topbar,
+      .hero,
+      .section,
+      .footer {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
 
-/* 弹窗内按钮容器：增加间距 */
-.modal-footer{
-  display:flex; gap:1rem; align-items:center; flex-wrap:wrap;
-}
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
 
-/* 弹窗内按钮：统一描边 */
-.modal-footer .cta-mini{
-  all:unset; cursor:pointer; font-weight:700; padding:.42rem .75rem; border-radius:10px;
-  border:1px solid rgba(255,255,255,.65); color:#fff;
-}
-/* 弹窗内购买按钮：与主 CTA 一致 */
-  .modal-footer .cta-outline{
-  all:unset; cursor:pointer; font-weight:700; padding:.42rem .75rem; border-radius:10px;
-    background: linear-gradient(180deg, var(--brand-600) 0%, var(--brand-500) 100%);
-    color:#fff;
-}
+      .top-link {
+        width: 100%;
+        text-align: center;
+      }
 
-@media (max-width:480px){ .modal-close{ transform:translate(300px,-10px);} }
+      .hero {
+        padding-top: 32px;
+      }
 
-/* 小链接颜色 */
-a#openWhyTop{ color:#aef3ff; text-decoration:underline; }
-a#openWhyTop:hover{ color:#fff; }
+      .lead {
+        font-size: 0.96rem;
+      }
 
-/* === Recharge Guide (rg-) minimal styles === */
-.rg-mask{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:999;padding:16px;}
-.rg-mask.show{display:flex;}
-.rg-card{width:min(560px,96vw);background:linear-gradient(180deg, rgba(10,36,48,.92), rgba(9,30,40,.92));color:#e6f7fb;border:1px solid var(--brand-outline);box-shadow:0 20px 60px rgba(0,0,0,.35);outline:0; backdrop-filter: blur(8px) saturate(120%); -webkit-backdrop-filter: blur(8px) saturate(120%); position:relative;}
-.rg-card::after{ content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; padding:1px; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; background: linear-gradient(135deg, rgba(45,212,191,.85), rgba(20,184,166,.75), rgba(13,148,136,.75)); }
-.rg-title{margin:.2rem 0 1rem;font-size:1.1rem;font-weight:800;}
-.rg-close{position:absolute;transform:translate(500px,-10px);background:#111827;color:#fff;border:none;padding:.35rem .55rem;border-radius:8px;cursor:pointer;}
-.rg-body p{margin:.4rem 0;}
-.rg-actions{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin:.9rem 0 .4rem;}
-.rg-btn{all:unset;cursor:pointer;padding:.55rem .9rem;border-radius:10px;font-weight:800;}
-.rg-btn-primary{background:linear-gradient(180deg,var(--brand-600),var(--brand-500));color:#fff;}
-.rg-btn-ghost{border:1px solid rgba(255,255,255,.65);color:#fff;}
-.rg-copyline{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;background:rgba(255,255,255,.06);padding:.5rem .6rem;border-radius:10px;border:1px solid rgba(255,255,255,.08)}
-.rg-url{user-select:all;word-break:break-all}
-.rg-hint{opacity:.8;font-size:.9rem}
-@media (max-width:480px){ .rg-close{ transform:translate(260px,-10px);} }
+      .section-title {
+        display: block;
+      }
 
-/* === 充值系统选择弹窗 (rs-) === */
-.rs-mask{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:999;padding:16px;}
-.rs-mask.show{display:flex;}
-.rs-card{width:min(520px,96vw);background:linear-gradient(180deg, rgba(10,36,48,.92), rgba(9,30,40,.92));color:#e6f7fb;border:1px solid var(--brand-outline);box-shadow:0 20px 60px rgba(0,0,0,.35);outline:0; backdrop-filter: blur(8px) saturate(120%); -webkit-backdrop-filter: blur(8px) saturate(120%); position:relative;}
-.rs-card::after{ content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; padding:1px; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; background: linear-gradient(135deg, rgba(45,212,191,.85), rgba(20,184,166,.75), rgba(13,148,136,.75)); }
-.rs-title{margin:.2rem 0 1rem;font-size:1.1rem;font-weight:800;text-align:center;}
-.rs-close{position:absolute;transform:translate(470px,-10px);background:#111827;color:#fff;border:none;padding:.35rem .55rem;border-radius:8px;cursor:pointer;}
-.rs-body p{margin:.4rem 0;text-align:center;}
-    .rs-options{display:flex;flex-direction:column;gap:16px;margin:20px 0;max-width:400px;margin-left:auto;margin-right:auto;}
-    .rs-option{padding:20px 16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:14px;cursor:pointer;transition:all .2s ease;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.1);}
-.rs-option:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25);transform:translateY(-2px);}
-    .rs-option-title{font-weight:800;margin-bottom:8px;color:#fff;font-size:1.05rem;}
-    .rs-option-desc{font-size:.9rem;opacity:.85;margin-bottom:10px;color:#d1f4ff;}
-    .rs-option-url{font-size:.85rem;color:var(--brand-500);word-break:break-all;font-weight:600;}
-.rs-actions{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin:.9rem 0 .4rem;justify-content:center;}
-.rs-btn{all:unset;cursor:pointer;padding:.55rem .9rem;border-radius:10px;font-weight:800;}
-.rs-btn-primary{background:linear-gradient(180deg,var(--brand-600),var(--brand-500));color:#fff;}
-.rs-btn-ghost{border:1px solid rgba(255,255,255,.65);color:#fff;}
-@media (max-width:640px){ 
-  .rs-options{ max-width:100%; gap:12px; }
-  .rs-option{ padding:16px 12px; }
-}
-@media (max-width:480px){ 
-  .rs-close{ transform:translate(260px,-10px);} 
-  .rs-option{ padding:12px 8px; }
-}
+      .section-title p {
+        margin-top: 7px;
+        text-align: left;
+      }
 
-/* === 官方通知弹窗（proof-） === */
-.proof-mask{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:120;padding:16px;}
-.proof-mask.show{display:flex;}
-.proof-card{width:min(860px,96vw);max-height:90vh;overflow:auto;background:#0b1220;color:rgba(255,255,255,.88);
-  border-radius:16px;padding:20px 20px 18px;border:1px solid rgba(255,255,255,.08);box-shadow:0 20px 60px rgba(0,0,0,.45);outline:0;}
-.proof-close{position:sticky;top:-8px;float:right;background:#111827;color:#fff;border:none;padding:.38rem .6rem;border-radius:8px;cursor:pointer;}
-.proof-title{margin:.2rem 0 1rem;font-size:1.15rem;font-weight:800;}
-.proof-sec{margin:.75rem 0;}
-.proof-sec h4{margin:.25rem 0 .4rem;font-size:1.02rem;}
-.proof-list{margin:.35rem 0 .2rem;padding-left:1rem;}
-.proof-list li{margin:.3rem 0;}
-.proof-actions{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin:1rem 0 .2rem;}
-.proof-btn{all:unset;cursor:pointer;padding:.55rem .9rem;border-radius:10px;font-weight:800;}
-.proof-btn-ghost{border:1px solid rgba(255,255,255,.65);color:#fff;}
-.proof-btn-primary{background:linear-gradient(180deg,var(--brand-600) 0%,var(--brand-500) 100%);color:#fff;}
-.proof-hint{opacity:.82;}
-.proof-imgwrap{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:130;display:none;background:rgba(0,0,0,.9);padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,.2);}
-.proof-imgwrap.show{display:block;}
-.proof-img{max-width:90vw;max-height:80vh;width:auto;height:auto;border-radius:8px;position:relative;}
-.proof-imgwrap .img-close{position:absolute;top:-10px;right:-10px;background:#ff4444;color:#fff;border:none;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:16px;font-weight:bold;display:none;z-index:131;}
-@media (max-width:640px){
-  .proof-imgwrap{padding:15px;border-radius:8px;}
-  .proof-imgwrap .img-close{display:block;}
-  .proof-img{max-width:95vw;max-height:85vh;}
-}
-.proof-openlink{opacity:.9;text-decoration:underline;cursor:pointer;margin-left:.5rem;}
-/* 价格构成页签内的小链接样式（弱化） */
-#tab-price .open-proof-link{opacity:.85;text-decoration:underline;cursor:pointer;margin-left:.6rem;}
-@media (max-width:480px){ .proof-close{position:static;float:none;margin-left:auto;display:block;margin-bottom:.2rem;} }
+      .plans,
+      .notice-grid,
+      .steps,
+      .feature-list {
+        grid-template-columns: 1fr;
+      }
 
-/* === 其他 AI 会员入口（极简一致） === */
-.secondary-actions{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  margin: 10px 0 0;
-}
-.btn-ai{
-  all:unset;
-  cursor:pointer;
-  font-weight:900;
-  padding:10px 14px;
-  border-radius:14px;
-  border:1px solid var(--brand-outline-strong);
-  background: rgba(255,255,255,.08);
-  color:#fff;
-  text-align:center;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  transition: transform .15s ease, background .2s ease, border-color .2s ease;
-}
-.btn-ai:hover{
-  background: rgba(255,255,255,.12);
-  border-color: rgba(45,212,191,.80);
-  transform: translateY(-1px);
-}
-.btn-ai .sub{
-  display:block;
-  font-size:.78rem;
-  font-weight:800;
-  opacity:.86;
-  margin-top:2px;
-  color:#ccfbf1;
-}
-/* 弹窗内容 */
+      .plan {
+        min-height: auto;
+      }
 
-.ai-section{ margin-top: 10px; }
-.ai-section:first-of-type{ margin-top: 6px; }
-.ai-section-title{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  font-weight:900;
-  color: rgba(255,255,255,.92);
-  margin: 6px 0 8px;
-  font-size: .92rem;
-  opacity:.95;
-}
-.ai-section-title::after{
-  content:"";
-  flex:1;
-  height:1px;
-  background: rgba(255,255,255,.10);
-  border-radius:1px;
-}
-.ai-items{ display:grid; gap:10px; margin: 12px 0 6px; }
-.ai-item{
-  position:relative;
-  padding:12px 12px;
-  border-radius:14px;
-  border:1px solid rgba(255,255,255,.10);
-  background: rgba(255,255,255,.06);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  transition: transform .16s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
-  outline: none;
-}
-.ai-item:hover,
-.ai-item:focus-within{
-  transform: translateY(-2px);
-  background: rgba(255,255,255,.085);
-  border-color: rgba(45,212,191,.35);
-  box-shadow: 0 10px 28px rgba(0,0,0,.28);
-}
-.ai-left{ min-width:0; }
-.ai-name{ font-weight:900; color:#fff; }
-.ai-meta{ margin-top:2px; font-size:.82rem; opacity:.85; color: rgba(255,255,255,.82); }
+      .plan-desc {
+        min-height: 0;
+      }
 
-.ai-pill{
-  display:inline-flex;
-  align-items:center;
-  margin-left:8px;
-  padding:2px 8px;
-  font-size:.72rem;
-  font-weight:900;
-  border-radius:9999px;
-  border:1px solid rgba(45,212,191,.55);
-  background: rgba(20,184,166,.16);
-  color:#ccfbf1;
-  white-space:nowrap;
-}
-.ai-note2{
-  opacity:.92;
-  color: rgba(204,251,241,.92);
-  font-weight:700;
-}
-.ai-item.featured{
-  border-color: rgba(45,212,191,.35);
-  background: linear-gradient(180deg, rgba(45,212,191,.12), rgba(255,255,255,.06));
-}
-.ai-item.featured:hover,
-.ai-item.featured:focus-within{
-  border-color: rgba(45,212,191,.60);
-  box-shadow: 0 14px 34px rgba(20,184,166,.18), 0 10px 28px rgba(0,0,0,.28);
-}
-.ai-actions{ display:flex; gap:8px; flex-shrink:0; }
-.ai-tag{
-  display:inline-flex;
-  align-items:center;
-  padding:.32rem .6rem;
-  border-radius:999px;
-  font-size:.78rem;
-  font-weight:800;
-  color:#ccfbf1;
-  border:1px solid rgba(45,212,191,.45);
-  background: rgba(20,184,166,.14);
-  white-space:nowrap;
-}
+      .support,
+      .support-actions,
+      .official-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
 
-.ai-actions{ position:relative; }
-.ai-buy{
-  all:unset; cursor:pointer;
-  padding:.42rem .72rem;
-  border-radius:10px;
-  font-weight:900;
-  border:1px solid rgba(45,212,191,.65);
-  color:#fff;
-  background: linear-gradient(180deg, var(--brand-600) 0%, var(--brand-500) 100%);
-}
-.ai-item:focus-within .ai-tag{
-  opacity:0;
-}
-.ai-tip{
-  margin: 10px 0 0;
-  font-size: .86rem;
-  opacity: .86;
-  color: rgba(255,255,255,.85);
-}
-.ai-btn{
-  all:unset; cursor:pointer;
-  padding:.42rem .72rem;
-  border-radius:10px;
-  font-weight:900;
-  border:1px solid rgba(255,255,255,.35);
-  color:#fff;
-  background: rgba(255,255,255,.06);
-  transition: transform .15s ease, filter .2s ease, background .2s ease;
-  white-space:nowrap;
-}
-.ai-btn:hover{ background: rgba(255,255,255,.10); transform: translateY(-1px); }
-.ai-btn.primary{
-  background: linear-gradient(180deg, var(--brand-600) 0%, var(--brand-500) 100%);
-  border-color: rgba(45,212,191,.65);
-}
-.ai-hint{
-  margin: 10px 0 0;
-  font-size: .86rem;
-  opacity: .82;
-  color: rgba(255,255,255,.80);
-  line-height: 1.6;
-}
+      .support-actions .mini-button,
+      .official-actions .button {
+        width: 100%;
+      }
 
+      .sticky-bar {
+        justify-content: space-between;
+      }
 
-/* === RS modal overrides (match screenshot style) === */
-.rs-card{
-  border-radius: 18px;
-  overflow: hidden;
-}
-.rs-title{ letter-spacing: .02em; }
-.rs-option-desc{ font-size:.9rem; opacity:.85; margin-bottom:10px; color:#d1f4ff; }
-.rs-option-url{ color:#a78bfa !important; } /* 紫色链接 */
-.rs-option{
-  padding: 22px 18px;
-  border-radius: 16px;
-}
-
-.price-tag.old-user {
-  background: linear-gradient(180deg, #fbbf24 0%, #d97706 100%);
-  color: #1f2937;
-  border: 1px solid rgba(251, 191, 36, 0.5);
-}
-</style>
+      .sticky-text {
+        max-width: 58vw;
+      }
+    }
+  </style>
 </head>
 <body>
-<main class="card">
-<header class="card-header">
-<div class="hero">
-<div aria-label="光年升级计划 官方充值平台" class="brand-badge">
-<svg aria-hidden="true" class="brand-icon" role="img" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<lineargradient id="lg" x1="0" x2="1" y1="1" y2="0">
-<stop offset="0" stop-color="#2dd4bf"></stop>
-<stop offset="1" stop-color="#14b8a6"></stop>
-</lineargradient>
-</defs>
-<path d="M30 8 L40 8 L40 18" fill="none" stroke="url(#lg)" stroke-linecap="round" stroke-width="4"></path>
-<path d="M40 8 L25 23" fill="none" stroke="url(#lg)" stroke-linecap="round" stroke-width="4"></path>
-<path d="M14 10 L14 36" stroke="#ccfbf1" stroke-linecap="round" stroke-width="4"></path>
-<path d="M8 22 L26 22" stroke="#ccfbf1" stroke-linecap="round" stroke-width="4"></path>
-<path d="M10 36 C16 30, 22 28, 28 28" stroke="#ccfbf1" stroke-linecap="round" stroke-width="4"></path>
-</svg>
-<div>
-<span class="brand-name">光年升级计划</span>
-<span class="brand-sub">· 官方充值平台</span>
-</div>
-</div>
-<h1>GPT Plus 安全充值 🛡️</h1>
-<div class="notice-bar-top">📢 老用户专享价 ¥180（原价 ¥188） ｜ 官方通道更稳</div>
-<div class="notice-bar-top" style="margin-top:10px; font-size:0.85rem;">
-  🔗 原站跳转：<a href="https://aipass.me" target="_blank" rel="noopener" style="color:#d1fae5;text-decoration:underline;">aipass.me</a>
-</div>
-<div class="hero-divider"></div>
-</div>
-<div class="price">
-<span class="price-val">¥180</span>
-<span class="price-tag old-user" style="text-decoration:line-through; opacity:.78;">原价 ¥188</span>
-<span class="price-tag">月付·标准版</span>
-<span class="price-tag old-user">老用户专享</span>
-</div>
-<div class="button-group">
-<button aria-label="立即购买卡密" class="btn-buy" id="buyBtn">🛒 立即购买 (¥180)</button>
-<button class="btn-recharge" id="rechargeBtn">💳 进入自动充值系统</button>
-</div>
-<div aria-hidden="true" class="actions-gap"></div>
-<div class="secondary-actions secondary-between">
-<button aria-label="查看其他 AI 官方会员充值" class="btn-ai" id="openAiModal">
-    🤖 其他 AI 官方会员（可选）
-    <span class="sub">GPT Pro · Claude · Super Grok</span>
-</button>
-</div>
-<div aria-hidden="true" class="actions-gap-sm"></div>
-<p class="small-risk">⚠ 警惕低价黑卡，避免封号风险</p>
-<div class="steps-mini">
-<span class="step-pill">1 下单卡密</span>
-<span class="step-pill">2 进入网站充值</span>
-<span class="step-pill">3 自动到帐</span>
-<a class="steps-link" href="#" id="openFlow">查看流程</a>
-</div>
-<ul class="buy-notes">
-<li>官方 iOS 通道·微信直充·5分钟自动到帐</li>
-<li>无需提供账号密码，支持新老账号</li>
-<li>可开票，需要开票请先联系人工，勿直接购买</li>
-</ul>
-<div class="badges">
-<span class="badge">📱 官方 iOS 通道</span>
-<span class="badge">🛡️ 无需提供密码</span>
-<span class="badge">🔒 降低封号风险</span>
-</div>
-<div class="stats">
-<div class="stat">
-<div class="stat-value">50,000+</div>
-<div class="stat-label">服务用户</div>
-</div>
-<div class="stat">
-<div class="stat-value">99.9%</div>
-<div class="stat-label">充值成功（近30天）</div>
-</div>
-<div class="stat">
-<div class="stat-value">9:00–24:00</div>
-<div class="stat-label">人工在线</div>
-</div>
-</div>
-</header>
-<footer>
-<div style="margin-bottom:10px;">面向国内用户的代充值通道，采用 iOS 官方渠道；自动化处理，三步完成。</div>
-</footer>
-</main>
-<div aria-hidden="true" class="cs-drawer" id="/* removed:csDrawer */">
-<div class="cs-head">
-<strong>联系人工</strong>
-<button aria-label="关闭" id="csClose">✕</button>
-</div>
-<div class="cs-body">
-<p>微信：<b id="wx">Jiage01888</b>
-<button class="copy" onclick="copyText('wx')">复制</button></p>
-<div class="qq-toggle">
-<button class="qq-toggle-btn" id="/* removed:qqToggle */">微信联系不上时，请联系/* removed:QQ */</button>
-<div class="qq-content" id="/* removed:qqContent */" style="display: none;">
-<p>/* removed:QQ */：<b id="qq">1852634132</b>
-<button class="copy" onclick="copyText('qq')">复制</button></p>
-</div>
-</div>
-</div>
-</div>
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?707cb0fe41fad23ba42b49fef402f68b";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
+  <main class="page">
+    <div class="shell">
+      <header class="topbar">
+        <div class="brand" aria-label="ChatGPT 镜像服务">
+          <div class="brand-mark">AI</div>
+          <div class="brand-text">
+            <strong>ChatGPT 镜像服务</strong>
+            <span>GPT 对话 + GPT Image 2 生图</span>
+          </div>
+        </div>
+        <a class="top-link" href="https://aipass.me" target="_blank" rel="noopener">需要官方 Plus？去 aipass.me</a>
+      </header>
 
-<a aria-label="¥180 立即购买" class="cta-sticky" href="#" id="mobileBuyBtn" role="button">¥180 立即购买</a>
-<div class="sticky-note" id="bottomNote">
-<span class="note-text">📌 当前价 <strong>¥180</strong> ｜ 客服微信：<strong id="wxid">Jiage01888</strong></span>
-<button class="cta-mini" id="copyWeChat">复制微信</button>
-<button class="cta-outline" id="openWhyFooter">为什么不是更便宜</button>
-<a data-open="/* removed:rechargeGuide */" style="opacity:.75;text-decoration:underline;margin-left:.5rem;display:none;">
-    已购买·去激活
-  </a>
-</div>
-<div aria-hidden="true" class="modal-mask" id="whyModal">
-<div aria-labelledby="whyTitle" class="modal-card" role="dialog" tabindex="-1">
-<button aria-label="关闭" class="modal-close" id="whyClose">×</button>
-<h3 id="whyTitle" style="margin:.2rem 0 1rem">为什么不是更便宜</h3>
-<nav aria-label="为什么不是更便宜" class="help-tabs" role="tablist">
-<button aria-controls="tab-price" aria-selected="true" class="tab-btn active" data-tab="price" id="tabbtn-price" role="tab">价格构成</button>
-<button aria-controls="tab-flow" aria-selected="false" class="tab-btn" data-tab="flow" id="tabbtn-flow" role="tab">充值流程</button>
-<button aria-controls="tab-support" aria-selected="false" class="tab-btn" data-tab="support" id="tabbtn-support" role="tab">客服微信</button>
-</nav>
-<section aria-labelledby="tabbtn-price" class="tab-panel active" id="tab-price" role="tabpanel">
-<p>官方订阅价 <strong>19.99 美元</strong>（或等值货币）。</p>
-<ul>
-<li>🍎 苹果通道与支付手续费</li>
-<li>🔒 账号维护与风控成本（避免黑卡、降低封号风险）</li>
-<li>👩‍💻 人工客服与售后保障</li>
-</ul>
-<p>综合以上成本，本站价格为 <strong>¥180</strong>。若整体成本上涨，价格可能相应调整。</p>
-<a class="open-proof-link" id="openOfficialProof">查看官方通知 / 展开说明</a>
-<div class="modal-footer">
-<a class="cta-outline" href="#" id="modalBuyP">去购买</a>
-<button class="cta-mini" id="modalCopyWxP">复制微信：<span class="wx">Jiage01888</span></button>
-</div>
-</section>
-<section aria-labelledby="tabbtn-flow" class="tab-panel" hidden="" id="tab-flow" role="tabpanel">
-<ul class="flow-steps">
-<li>① 下单获取卡密</li>
-<li>② 获取账号充值信息（无需提供账号密码）</li>
-<li>③ 约 5 分钟到账</li>
-</ul>
-<p class="hint">提示：若遇到账延迟，请先勿重复下单，联系人工处理。</p>
-<div class="modal-footer">
-<a class="cta-outline" href="#" id="modalBuyF">去购买</a>
-<button class="cta-mini" id="modalCopyWxF">复制微信：<span class="wx">Jiage01888</span></button>
-</div>
-</section>
-<section aria-labelledby="tabbtn-support" class="tab-panel" hidden="" id="tab-support" role="tabpanel">
-<p>微信：<strong class="wx">Jiage01888</strong></p>
-<p class="hint">人工在线：9:00–24:00（其他时段尽量回复）</p>
-<div class="modal-footer">
-<a class="cta-outline" href="#" id="modalBuyS">去购买</a>
-<button class="cta-mini" id="modalCopyWxS">复制微信：<span class="wx">Jiage01888</span></button>
-</div>
-</section>
-</div>
-</div>
-<div aria-hidden="true" class="modal-mask" id="aiModal">
-<div aria-labelledby="aiTitle" class="modal-card" role="dialog" tabindex="-1">
-<button aria-label="关闭" class="modal-close" id="aiClose">×</button>
-<h3 id="aiTitle" style="margin:.2rem 0 .6rem">其他 AI 官方会员充值</h3>
-<div class="ai-section">
-<div class="ai-section-title">✨ 推荐方案</div>
-<div class="ai-items" role="list">
-<div aria-label="GPT Pro 100刀 ¥750 热门推荐" class="ai-item featured" role="listitem" tabindex="0">
-<div class="ai-left">
-<div class="ai-name">🚀 GPT Pro 100刀 <span class="ai-pill">热门</span></div>
-<div class="ai-meta">官方会员 · ¥750 <span class="ai-note2">｜高阶用户推荐</span></div>
-</div>
-<div class="ai-actions">
-<button class="ai-buy ai-btn primary" data-url="https://fe.dtyuedan.cn/shop/jiage">点击购买</button>
-</div>
-</div>
-<div aria-label="GPT Pro 200刀 ¥1680 推荐" class="ai-item featured" role="listitem" tabindex="0">
-<div class="ai-left">
-<div class="ai-name">💎 GPT Pro 200刀 <span class="ai-pill">推荐</span></div>
-<div class="ai-meta">官方会员 · ¥1680 · 官方通道 <span class="ai-note2">｜进阶方案</span></div>
-</div>
-<div class="ai-actions">
-<button class="ai-buy ai-btn primary" data-url="https://fe.dtyuedan.cn/shop/jiage">点击购买</button>
-</div>
-</div>
-</div>
-</div>
-<div class="ai-section">
-<div class="ai-section-title">更多选项</div>
-<div class="ai-items" role="list">
-<div aria-label="Claude Pro 1个月 ¥180" class="ai-item" role="listitem" tabindex="0">
-<div class="ai-left">
-<div class="ai-name">Claude Pro</div>
-<div class="ai-meta">1个月 · ¥180 · 官方通道</div>
-</div>
-<div class="ai-actions">
-<button class="ai-buy ai-btn primary" data-url="https://fe.dtyuedan.cn/shop/jiage">点击购买</button>
-</div>
-</div>
-<div aria-label="Claude Max 100刀 ¥880" class="ai-item" role="listitem" tabindex="0">
-<div class="ai-left">
-<div class="ai-name">Claude Max 100刀</div>
-<div class="ai-meta">会员订阅 · ¥880 · 官方通道</div>
-</div>
-<div class="ai-actions">
-<button class="ai-buy ai-btn primary" data-url="https://fe.dtyuedan.cn/shop/jiage">点击购买</button>
-</div>
-</div>
-<div aria-label="Claude Max 200刀 ¥1880" class="ai-item" role="listitem" tabindex="0">
-<div class="ai-left">
-<div class="ai-name">Claude Max 200刀</div>
-<div class="ai-meta">会员订阅 · ¥1880 · 官方通道</div>
-</div>
-<div class="ai-actions">
-<button class="ai-buy ai-btn primary" data-url="https://fe.dtyuedan.cn/shop/jiage">点击购买</button>
-</div>
-</div>
-<div aria-label="Super Grok 1个月 ¥228" class="ai-item" role="listitem" tabindex="0">
-<div class="ai-left">
-<div class="ai-name">Super Grok</div>
-<div class="ai-meta">1个月 · ¥228 · 官方通道</div>
-</div>
-<div class="ai-actions">
-<button class="ai-buy ai-btn primary" data-url="https://fe.dtyuedan.cn/shop/jiage">点击购买</button>
-</div>
-</div>
-</div>
-</div>
-<div class="ai-tip">提示：如需人工协助，复制微信联系人工。</div>
-<div class="modal-footer" style="margin-top:12px; gap:.6rem;">
-<button class="cta-mini" id="aiCopyWx">复制微信：<span class="wx">Jiage01888</span></button>
-<a class="cta-outline" href="#" id="aiGoGpt">我只想充 GPT Plus</a>
-</div>
-</div>
-</div>
-<div aria-hidden="true" class="proof-mask" id="officialProof">
-<div aria-labelledby="proofTitle" class="proof-card" role="dialog" tabindex="-1">
-<button aria-label="关闭" class="proof-close" id="proofClose">×</button>
-<h3 class="proof-title" id="proofTitle">官方价格通知 &amp; 合规说明</h3>
-<section class="proof-sec" id="proof-official">
-<h4>官方价格通知（摘要）</h4>
-<ul class="proof-list">
-<li>官方订阅价 <strong>19.99 美元/月</strong>（自 <strong>2025-09-16</strong> 起分批执行）。</li>
-<li>本站走 <strong>苹果官方通道</strong>，价格含 <strong>通道费 / 风控 / 售后</strong>。</li>
-</ul>
-<p>→ <strong>定价 ¥180</strong>（如整体成本上调，将同步调整）。</p>
-<div class="proof-actions">
-<button class="proof-btn proof-btn-ghost" id="toggleProofImg">查看官方通知截图</button>
-</div>
-<div class="proof-imgwrap" id="proofImgWrap">
-<button aria-label="关闭图片" class="img-close" id="imgClose">×</button>
-<img alt="官方价格通知截图" class="proof-img" id="proofImg" src="gpt 图片.png"/>
-</div>
-</section>
-<section class="proof-sec" id="proof-forex">
-<h4>关于"低汇率国家"的说明</h4>
-<ul class="proof-list">
-<li>低价多为 <strong>跨区礼品卡/黑卡</strong>，<strong>不稳定、风险高</strong>。</li>
-<li>易回滚/拒付，易触发风控，售后不可控。</li>
-</ul>
-<p class="proof-hint">目前没有 <strong>长期可复用</strong> 的低汇率方案；我们仅提供 <strong>官方通道</strong>，含 <strong>售后与风险处置</strong>。</p>
-</section>
-<section class="proof-sec">
-<div class="proof-actions">
-<button class="proof-btn proof-btn-ghost" id="proofCopyWx">复制微信：<span class="wx">Jiage01888</span></button>
-<a class="proof-btn proof-btn-primary" href="#" id="proofGoBuy" rel="noopener">去购买</a>
-</div>
-</section>
-</div>
-</div>
+      <section class="hero" id="top">
+        <div class="eyebrow">国内可访问的 GPT 镜像入口</div>
+        <h1>买完获取入口，打开就能用</h1>
+        <p class="lead">
+          适合网络环境不方便、临时使用或轻量办公的用户。支持日常问答、写作、翻译、总结、代码辅助，也已接入 GPT Image 2 API 生图能力。
+        </p>
+        <div class="quick-points" aria-label="服务特点">
+          <span class="pill">无需下载安装</span>
+          <span class="pill">手机电脑都能用</span>
+          <span class="pill">支持 GPT Image 2</span>
+          <span class="pill">客服协助处理问题</span>
+        </div>
+      </section>
 
+      <section class="section" id="plans">
+        <div class="section-title">
+          <h2>选择套餐</h2>
+          <p>按使用周期购买，临时用选天卡，长期用选月卡。</p>
+        </div>
+        <div class="plans">
+          <article class="plan">
+            <div class="plan-name">天卡</div>
+            <div class="price"><strong>¥10</strong><span>/ 天</span></div>
+            <p class="plan-desc">适合临时体验、短期查询、偶尔处理文本任务。</p>
+            <ul>
+              <li>购买后获取镜像入口</li>
+              <li>支持手机和电脑浏览器</li>
+              <li>适合轻量使用</li>
+            </ul>
+            <a class="button" href="https://fe.dtyuedan.cn/item/4xqzr3" target="_blank" rel="noopener">购买天卡</a>
+          </article>
 
-<!-- === 自动充值系统选择弹窗（rechargeSystemModal）=== -->
-<div aria-hidden="true" class="rs-mask" id="rechargeSystemModal">
-<div aria-labelledby="rsTitle" class="rs-card" role="dialog" tabindex="-1">
-<button aria-label="关闭" class="rs-close" id="rsClose">×</button>
-<h3 class="rs-title" id="rsTitle">选择充值网站激活</h3>
-<div class="rs-body" style="margin: 6px 0 10px;">
-<div style="font-weight:800; opacity:.9; margin-bottom:6px;">说明：</div>
-<ul style="margin:0; padding-left: 1.15rem; line-height: 1.7; opacity:.88;">
-<li>购买了自动充值1卡密 → 进入网站1激活</li>
-<li>购买了自动充值2卡密 → 进入网站2激活</li>
-</ul>
-</div>
-<div class="rs-options" role="list" style="margin-top:14px;">
-<button aria-label="进入自动充值 1" class="rs-option" data-url="https://ow800.com/auto" role="listitem" type="button">
-<div class="rs-option-title">自动充值1</div>
-<div class="rs-option-desc">点击进入激活网站</div>
-<div class="rs-option-url">https://ow800.com/auto</div>
-</button>
-<button aria-label="进入自动充值 2" class="rs-option" data-url="https://ow800.com/auto" role="listitem" type="button">
-<div class="rs-option-title">自动充值2</div>
-<div class="rs-option-desc">点击进入激活网站</div>
-<div class="rs-option-url">https://ow800.com/auto</div>
-</button>
-</div>
-<div class="rs-actions" style="margin-top:16px; justify-content:center;">
-<button class="rs-btn rs-btn-ghost" id="rsCancel" type="button">取消</button>
-</div>
-</div>
-</div>
-<!-- === /自动充值系统选择弹窗 === -->
-<script>
-(function(){
-  const BUY_URL = 'https://fe.dtyuedan.cn/item/gcgto4';
-  const RECHARGE_URL = 'https://ow800.com/auto';
-  const WX_ID = (document.getElementById('wxid')?.textContent || 'Jiage01888').trim();
+          <article class="plan">
+            <div class="plan-name">周卡</div>
+            <div class="price"><strong>¥48</strong><span>/ 周</span></div>
+            <p class="plan-desc">适合连续几天学习、办公、写作或测试镜像稳定性。</p>
+            <ul>
+              <li>一周内持续使用</li>
+              <li>适合中等频率需求</li>
+              <li>遇到问题可联系客服</li>
+            </ul>
+            <a class="button" href="https://fe.dtyuedan.cn/item/szv9bh" target="_blank" rel="noopener">购买周卡</a>
+          </article>
 
-  const $ = (sel, root=document) => root.querySelector(sel);
-  const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+          <article class="plan featured">
+            <span class="tag">推荐</span>
+            <div class="plan-name">月卡</div>
+            <div class="price"><strong>¥88</strong><span>/ 月</span></div>
+            <p class="plan-desc">适合长期使用，单日成本更低，是日常办公和学习更合适的选择。</p>
+            <ul>
+              <li>长期使用更划算</li>
+              <li>适合高频文字对话</li>
+              <li>可体验生图能力</li>
+            </ul>
+            <a class="button" href="https://fe.dtyuedan.cn/item/n9e9af" target="_blank" rel="noopener">购买月卡</a>
+          </article>
+        </div>
+      </section>
 
-  // --- tiny toast ---
-  function toast(msg){
-    const el = document.createElement('div');
-    el.textContent = msg;
-    el.style.cssText = [
-      'position:fixed','left:50%','bottom:110px','transform:translateX(-50%)',
-      'background:rgba(0,0,0,.78)','color:#fff','padding:10px 14px',
-      'border-radius:12px','font-size:14px','z-index:99999',
-      'max-width:80vw','text-align:center','box-shadow:0 10px 30px rgba(0,0,0,.35)',
-      'opacity:0','transition:opacity .15s ease'
-    ].join(';');
-    document.body.appendChild(el);
-    requestAnimationFrame(()=>{ el.style.opacity='1'; });
-    setTimeout(()=>{ el.style.opacity='0'; setTimeout(()=>el.remove(), 220); }, 1400);
-  }
+      <section class="section">
+        <div class="notice-grid">
+          <article class="notice warning">
+            <h3>GPT Image 2 生图说明</h3>
+            <p>
+              镜像入口已接入 GPT Image 2 API，支持文字生图和简单图片创作。但生图能力受模型排队、接口状态、网络环境和图片复杂度影响，速度可能较慢，也可能失败、超时或需要重试。购买后不代表每次都能稳定、快速出图。
+            </p>
+          </article>
+          <article class="notice official">
+            <h3>关于官方 ChatGPT Plus</h3>
+            <p>
+              镜像服务不等同于官方 ChatGPT Plus，在稳定性、功能完整度、账号体验和高峰期可用性上，通常不如官方 Plus。如果你能解决网络环境，建议优先使用官方 ChatGPT Plus。
+            </p>
+            <div class="official-actions">
+              <a class="button secondary" href="https://aipass.me" target="_blank" rel="noopener">前往 GPT Plus 充值站</a>
+            </div>
+          </article>
+        </div>
+      </section>
 
-  // --- copy ---
-  async function copyToClipboard(text){
-    try{
-      if(navigator.clipboard && navigator.clipboard.writeText){
-        await navigator.clipboard.writeText(text);
-      }else{
-        const ta=document.createElement('textarea');
-        ta.value=text; ta.setAttribute('readonly','');
-        ta.style.position='fixed'; ta.style.left='-9999px';
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        ta.remove();
+      <section class="section">
+        <div class="section-title">
+          <h2>购买后怎么用</h2>
+          <p>流程尽量简单，有问题直接联系客服。</p>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <strong>选择套餐</strong>
+            <span>按你的使用周期选择天卡、周卡或月卡。</span>
+          </div>
+          <div class="step">
+            <strong>完成购买</strong>
+            <span>跳转到购买页面，按提示完成下单。</span>
+          </div>
+          <div class="step">
+            <strong>获取入口</strong>
+            <span>购买后获取镜像入口或使用说明。</span>
+          </div>
+          <div class="step">
+            <strong>打开使用</strong>
+            <span>手机或电脑浏览器打开入口即可使用。</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title">
+          <h2>适合这些需求</h2>
+          <p>镜像适合轻量和临时场景，不建议当作官方 Plus 的完整替代。</p>
+        </div>
+        <div class="feature-list">
+          <div class="feature">
+            <strong>日常对话</strong>
+            <span>问答、学习辅助、资料整理、灵感扩展。</span>
+          </div>
+          <div class="feature">
+            <strong>写作办公</strong>
+            <span>文案、邮件、总结、翻译、表格思路。</span>
+          </div>
+          <div class="feature">
+            <strong>代码辅助</strong>
+            <span>解释代码、排查思路、生成脚本草稿。</span>
+          </div>
+          <div class="feature">
+            <strong>图片创作</strong>
+            <span>头像、海报、商品图、配图等轻量生图。</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="support">
+          <div>
+            <strong>客服与售后</strong>
+            <p>镜像服务受网络与接口状态影响，如遇无法访问、生成失败、入口异常等情况，请联系客服处理。</p>
+          </div>
+          <div class="support-actions">
+            <button class="mini-button" type="button" id="copyWx">复制微信：Jiage01888</button>
+            <a class="mini-button" href="#plans" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;">查看套餐</a>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        本站提供镜像入口服务，不是 OpenAI 官方网站，也不等同于官方 ChatGPT Plus。若你需要更完整、更稳定的官方体验，建议使用官方 ChatGPT Plus。
+      </footer>
+    </div>
+  </main>
+
+  <div class="sticky-bar" aria-label="快速购买">
+    <div class="sticky-text">天卡 ¥10 ｜ 周卡 ¥48 ｜ 月卡 ¥88</div>
+    <a class="mini-button" href="#plans" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;">立即购买</a>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (function () {
+      const WX_ID = 'Jiage01888';
+      const toast = document.getElementById('toast');
+      const copyWx = document.getElementById('copyWx');
+
+      function showToast(message) {
+        if (!toast) return;
+        toast.textContent = message;
+        toast.classList.add('show');
+        window.clearTimeout(showToast.timer);
+        showToast.timer = window.setTimeout(function () {
+          toast.classList.remove('show');
+        }, 1500);
       }
-      toast('已复制：' + text);
-      return true;
-    }catch(e){
-      toast('复制失败，请手动复制：' + text);
-      return false;
-    }
-  }
 
-  function openNew(url){
-    window.open(url, '_blank', 'noopener');
-  }
-
-  // --- buy buttons ---
-  $('#buyBtn')?.addEventListener('click', (e)=>{ e.preventDefault(); openNew(BUY_URL); });
-  $('#mobileBuyBtn')?.addEventListener('click', (e)=>{ e.preventDefault(); openNew(BUY_URL); });
-
-  // --- bottom copy wx ---
-  $('#copyWeChat')?.addEventListener('click', async (e)=>{ e.preventDefault(); await copyToClipboard(WX_ID); });
-
-  // ========== Modal helpers ==========
-  function openMask(mask){
-    if(!mask) return;
-    mask.classList.add('show');
-    mask.setAttribute('aria-hidden','false');
-    // focus dialog if present
-    const dlg = mask.querySelector('[role="dialog"]');
-    setTimeout(()=> dlg?.focus?.(), 0);
-    document.body.classList.add('modal-open');
-  }
-  function closeMask(mask){
-    if(!mask) return;
-    mask.classList.remove('show');
-    mask.setAttribute('aria-hidden','true');
-    document.body.classList.remove('modal-open');
-  }
-  function bindMaskClose(mask, closeSelectors){
-    if(!mask) return;
-    // click mask background
-    mask.addEventListener('click', (e)=>{
-      if(e.target === mask) closeMask(mask);
-    });
-    // close buttons
-    closeSelectors.forEach(sel=>{
-      mask.querySelector(sel)?.addEventListener('click', (e)=>{ e.preventDefault(); closeMask(mask); });
-    });
-    // ESC
-    document.addEventListener('keydown', (e)=>{
-      if(e.key === 'Escape' && mask.classList.contains('show')) closeMask(mask);
-    });
-  }
-
-  // ========== Recharge System Modal ==========
-  const rsMask = $('#rechargeSystemModal');
-  $('#rechargeBtn')?.addEventListener('click', (e)=>{ e.preventDefault(); openNew(RECHARGE_URL); });
-  bindMaskClose(rsMask, ['#rsClose', '#rsCancel']);
-  $$('.rs-option', rsMask || document).forEach(btn=>{
-    btn.addEventListener('click', (e)=>{
-      e.preventDefault();
-      const url = btn.getAttribute('data-url');
-      if(url) openNew(url);
-      closeMask(rsMask);
-    });
-  });
-
-  // ========== AI Modal ==========
-  const aiMask = $('#aiModal');
-  $('#openAiModal')?.addEventListener('click', (e)=>{ e.preventDefault(); openMask(aiMask); });
-  bindMaskClose(aiMask, ['#aiClose']);
-  // ai buy links
-  $$('.ai-buy', aiMask || document).forEach(btn=>{
-    btn.addEventListener('click', (e)=>{
-      e.preventDefault();
-      const url = btn.getAttribute('data-url');
-      if(url) openNew(url);
-    });
-  });
-  $('#aiCopyWx')?.addEventListener('click', async (e)=>{ e.preventDefault(); await copyToClipboard(WX_ID); });
-  $('#aiGoGpt')?.addEventListener('click', (e)=>{
-    e.preventDefault();
-    closeMask(aiMask);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-
-  // ========== Why/Flow/Support Modal (tabs) ==========
-  const whyMask = $('#whyModal');
-  function showWhyTab(tab){
-    if(!whyMask) return;
-    const tabs = ['price','flow','support'];
-    tabs.forEach(t=>{
-      const btn = $('#tabbtn-' + t, whyMask);
-      const panel = $('#tab-' + t, whyMask);
-      const active = (t === tab);
-      btn?.classList.toggle('active', active);
-      btn?.setAttribute('aria-selected', active ? 'true' : 'false');
-      if(panel){
-        if(active){
-          panel.classList.add('active');
-          panel.hidden = false;
-        }else{
-          panel.classList.remove('active');
-          panel.hidden = true;
+      async function copyText(text) {
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(text);
+          } else {
+            const input = document.createElement('textarea');
+            input.value = text;
+            input.setAttribute('readonly', '');
+            input.style.position = 'fixed';
+            input.style.left = '-9999px';
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('copy');
+            input.remove();
+          }
+          showToast('已复制微信：' + text);
+        } catch (error) {
+          showToast('复制失败，请手动复制：' + text);
         }
       }
-    });
-  }
-  function openWhy(tab='price'){
-    showWhyTab(tab);
-    openMask(whyMask);
-  }
-  // Openers
-  $('#openWhyFooter')?.addEventListener('click', (e)=>{ e.preventDefault(); openWhy('price'); });
-  $('#openFlow')?.addEventListener('click', (e)=>{ e.preventDefault(); openWhy('flow'); });
 
-  // Tabs click
-  $$('.help-tabs [data-tab]', whyMask || document).forEach(btn=>{
-    btn.addEventListener('click', (e)=>{
-      e.preventDefault();
-      showWhyTab(btn.getAttribute('data-tab') || 'price');
-    });
-  });
-
-  // Close
-  bindMaskClose(whyMask, ['#whyClose']);
-
-  // why modal buy buttons
-  ['#modalBuyP','#modalBuyF','#modalBuyS'].forEach(sel=>{
-    $(sel, whyMask || document)?.addEventListener('click', (e)=>{ e.preventDefault(); openNew(BUY_URL); });
-  });
-
-  // why modal copy wx buttons (with toast)
-  ['#modalCopyWxP','#modalCopyWxF','#modalCopyWxS'].forEach(sel=>{
-    $(sel, whyMask || document)?.addEventListener('click', async (e)=>{ e.preventDefault(); await copyToClipboard(WX_ID); });
-  });
-
-  // “查看官方通知 / 展开说明” -> 打开官方通知弹窗（officialProof）
-  const proofMask = $('#officialProof');
-  if(proofMask){
-    bindMaskClose(proofMask, ['#proofClose']);
-    $('#openOfficialProof')?.addEventListener('click', (e)=>{
-      e.preventDefault();
-      openMask(proofMask);
-    });
-
-    // 官方通知弹窗：复制微信 / 去购买
-    $('#proofCopyWx', proofMask)?.addEventListener('click', async (e)=>{
-      e.preventDefault();
-      await copyToClipboard(WX_ID);
-    });
-    $('#proofGoBuy', proofMask)?.addEventListener('click', (e)=>{
-      e.preventDefault();
-      openNew(BUY_URL);
-    });
-
-    // 官方通知截图：打开/关闭
-    const imgWrap = $('#proofImgWrap', proofMask);
-    const openImgBtn = $('#toggleProofImg', proofMask);
-    const closeImgBtn = $('#imgClose', proofMask);
-    const showImg = ()=>{ if(imgWrap){ imgWrap.classList.add('show'); } };
-    const hideImg = ()=>{ if(imgWrap){ imgWrap.classList.remove('show'); } };
-    openImgBtn?.addEventListener('click', (e)=>{ e.preventDefault(); showImg(); });
-    closeImgBtn?.addEventListener('click', (e)=>{ e.preventDefault(); hideImg(); });
-    // 点击遮罩区域（非图片）也关闭
-    imgWrap?.addEventListener('click', (e)=>{
-      if(e.target === imgWrap) hideImg();
-    });
-  } else {
-    // 如果没有官方通知弹窗 DOM，则保持静默
-    $('#openOfficialProof')?.addEventListener('click', (e)=>{
-      e.preventDefault();
-      toast('暂无更多说明');
-    });
-  }
-
-})();
-</script></body>
+      copyWx && copyWx.addEventListener('click', function () {
+        copyText(WX_ID);
+      });
+    })();
+  </script>
+</body>
 </html>
