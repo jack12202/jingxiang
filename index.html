@@ -123,7 +123,7 @@
     }
 
     .hero {
-      padding: 42px 28px 26px;
+      padding: 24px 24px 18px;
       text-align: center;
     }
 
@@ -141,10 +141,17 @@
       font-weight: 700;
     }
 
+    .hero-kicker {
+      margin: 12px 0 -6px;
+      color: rgba(204, 251, 241, 0.6);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
     h1 {
-      margin: 18px auto 12px;
+      margin: 10px auto 8px;
       max-width: 760px;
-      font-size: clamp(2rem, 5vw, 4rem);
+      font-size: clamp(1.5rem, 3.4vw, 2.1rem);
       line-height: 1.08;
       letter-spacing: 0;
     }
@@ -153,8 +160,8 @@
       max-width: 690px;
       margin: 0 auto;
       color: #d7e5e7;
-      font-size: 1.02rem;
-      line-height: 1.8;
+      font-size: 0.96rem;
+      line-height: 1.55;
     }
 
     .quick-points {
@@ -162,7 +169,7 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 9px;
-      margin: 22px auto 0;
+      margin: 16px auto 0;
     }
 
     .pill {
@@ -217,7 +224,7 @@
 
     .plan {
       position: relative;
-      min-height: 286px;
+      min-height: 190px;
       padding: 20px;
       border-radius: var(--radius);
       border: 1px solid var(--line);
@@ -233,6 +240,19 @@
         linear-gradient(180deg, rgba(20, 184, 166, 0.20), rgba(12, 35, 38, 0.92)),
         var(--panel-strong);
       box-shadow: 0 16px 44px rgba(20, 184, 166, 0.16);
+    }
+
+    .plan.confirmed {
+      border-color: rgba(45, 212, 191, 0.36);
+      background:
+        linear-gradient(180deg, rgba(20, 184, 166, 0.12), rgba(12, 35, 38, 0.88)),
+        var(--panel);
+    }
+
+    .plan.confirmed .tag {
+      background: rgba(204, 251, 241, 0.16);
+      color: #ccfbf1;
+      border: 1px solid rgba(45, 212, 191, 0.35);
     }
 
     .tag {
@@ -270,33 +290,25 @@
       font-size: 0.9rem;
     }
 
-    .plan-desc {
-      min-height: 44px;
+    .plan-note {
+      min-height: 42px;
       margin: 0;
       color: #cbdde0;
-      line-height: 1.55;
-      font-size: 0.92rem;
-    }
-
-    .plan ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: grid;
-      gap: 8px;
-      color: #e5f6f6;
+      line-height: 1.5;
       font-size: 0.88rem;
     }
 
-    .plan li::before {
-      content: "";
-      display: inline-block;
-      width: 6px;
-      height: 6px;
-      margin-right: 8px;
-      border-radius: 999px;
-      background: var(--brand);
-      vertical-align: 2px;
+    .plan-warning {
+      margin: 14px 0 0;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(253, 230, 138, 0.32);
+      background: rgba(253, 230, 138, 0.08);
+      color: #fde68a;
+      font-size: 0.9rem;
+      font-weight: 900;
+      text-align: center;
+      line-height: 1.7;
     }
 
     .button {
@@ -330,7 +342,7 @@
 
     .notice-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       gap: 14px;
     }
 
@@ -353,9 +365,88 @@
       line-height: 1.75;
     }
 
+    .notice ul {
+      margin: 10px 0;
+      padding-left: 1.15rem;
+      color: #d5e7e9;
+      font-size: 0.93rem;
+      line-height: 1.75;
+    }
+
+    .notice li {
+      margin: 2px 0;
+    }
+
     .notice.warning {
       border-color: rgba(253, 230, 138, 0.28);
       background: rgba(253, 230, 138, 0.08);
+    }
+
+    .notice.precheck {
+      border-color: rgba(253, 230, 138, 0.58);
+      background:
+        linear-gradient(180deg, rgba(253, 230, 138, 0.16), rgba(253, 230, 138, 0.07)),
+        rgba(20, 18, 8, 0.28);
+      box-shadow: 0 18px 48px rgba(253, 230, 138, 0.12);
+    }
+
+    .notice.precheck h3 {
+      font-size: 1.18rem;
+    }
+
+    .notice.precheck p,
+    .notice.precheck ul {
+      font-size: 0.98rem;
+      line-height: 1.65;
+    }
+
+    .service-boundary {
+      margin: 10px 0 0;
+      padding: 9px 10px;
+      border-radius: 12px;
+      border: 1px dashed rgba(253, 230, 138, 0.24);
+      background: rgba(0, 0, 0, 0.06);
+      color: rgba(229, 231, 235, 0.78);
+      font-size: 0.82rem;
+      line-height: 1.55;
+    }
+
+    .service-boundary strong {
+      display: inline;
+      margin: 0 8px 0 0;
+      color: #fde68a;
+      font-size: 0.86rem;
+    }
+
+    .service-boundary p {
+      margin: 3px 0;
+    }
+
+    .boundary-wx {
+      margin-top: 6px;
+      min-height: 28px;
+      padding: 0 9px;
+      border-radius: 9px;
+      border: 1px solid rgba(253, 230, 138, 0.26);
+      background: transparent;
+      color: rgba(253, 230, 138, 0.9);
+      font-size: 0.78rem;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .notice-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .notice-actions .button {
+      width: auto;
+      min-width: 190px;
+      padding: 0 16px;
+      margin-top: 0;
     }
 
     .notice.warning h3 {
@@ -654,149 +745,70 @@
       </header>
 
       <section class="hero" id="top">
-        <div class="eyebrow">国内可访问的 GPT 镜像入口</div>
-        <h1>买完获取入口，打开就能用</h1>
+        <div class="hero-kicker">备用入口（仅临时使用）</div>
+        <h1>临时可用的 GPT 镜像入口</h1>
         <p class="lead">
-          适合网络环境不方便、临时使用或轻量办公的用户。支持日常问答、写作、翻译、总结、代码辅助，也已接入 GPT Image 2 API 生图能力。
+          适合网络环境受限或临时使用<br>需要稳定体验，请优先使用官方 ChatGPT Plus
         </p>
         <div class="quick-points" aria-label="服务特点">
           <span class="pill">无需下载安装</span>
           <span class="pill">手机电脑都能用</span>
           <span class="pill">支持 GPT Image 2</span>
-          <span class="pill">客服协助处理问题</span>
+          <span class="pill">适合轻量临时使用</span>
         </div>
+      </section>
+
+      <section class="section" aria-label="使用前说明">
+        <article class="notice warning precheck">
+          <h3>⚠ 镜像服务仅适合临时使用，存在波动</h3>
+          <p>高峰期可能变慢 / 请求可能失败 / 生图不保证每次成功</p>
+          <p>👉 需要稳定体验请用官方 Plus</p>
+          <p>👉 能接受再继续使用</p>
+          <div class="notice-actions">
+            <a class="button secondary" href="https://aipass.me" target="_blank" rel="noopener">前往官方 Plus（更稳定）</a>
+            <a class="button" href="#plans">👉 我已了解镜像可能不稳定，继续使用</a>
+          </div>
+          <div class="service-boundary">
+            <p><strong>📌 仅处理入口无法访问，不提供任何答疑</strong></p>
+            <p>👉 无法访问再联系微信</p>
+            <button class="boundary-wx" type="button" id="copyWx">复制微信：Jiage01888</button>
+          </div>
+        </article>
       </section>
 
       <section class="section" id="plans">
         <div class="section-title">
-          <h2>选择套餐</h2>
-          <p>按使用周期购买，临时用选天卡，长期用选月卡。</p>
+          <h2>先试用，再决定长期使用</h2>
+          <p>第一次建议先买天卡测试，确认能接受波动后再考虑月卡。</p>
         </div>
         <div class="plans">
-          <article class="plan">
+          <article class="plan featured">
+            <span class="tag">首次建议</span>
             <div class="plan-name">天卡</div>
             <div class="price"><strong>¥10</strong><span>/ 天</span></div>
-            <p class="plan-desc">适合临时体验、短期查询、偶尔处理文本任务。</p>
-            <ul>
-              <li>购买后获取镜像入口</li>
-              <li>支持手机和电脑浏览器</li>
-              <li>适合轻量使用</li>
-            </ul>
-            <a class="button" href="https://fe.dtyuedan.cn/item/4xqzr3" target="_blank" rel="noopener">购买天卡</a>
+            <p class="plan-note">第一次建议购买。用于测试是否能接受镜像波动。</p>
+            <a class="button" href="https://fe.dtyuedan.cn/item/4xqzr3" target="_blank" rel="noopener">先体验一天</a>
           </article>
 
           <article class="plan">
             <div class="plan-name">周卡</div>
             <div class="price"><strong>¥48</strong><span>/ 周</span></div>
-            <p class="plan-desc">适合连续几天学习、办公、写作或测试镜像稳定性。</p>
-            <ul>
-              <li>一周内持续使用</li>
-              <li>适合中等频率需求</li>
-              <li>遇到问题可联系客服</li>
-            </ul>
-            <a class="button" href="https://fe.dtyuedan.cn/item/szv9bh" target="_blank" rel="noopener">购买周卡</a>
+            <p class="plan-note">短期使用选择。</p>
+            <a class="button" href="https://fe.dtyuedan.cn/item/szv9bh" target="_blank" rel="noopener">短期使用</a>
           </article>
 
-          <article class="plan featured">
-            <span class="tag">推荐</span>
+          <article class="plan">
             <div class="plan-name">月卡</div>
             <div class="price"><strong>¥88</strong><span>/ 月</span></div>
-            <p class="plan-desc">适合长期使用，单日成本更低，是日常办公和学习更合适的选择。</p>
-            <ul>
-              <li>长期使用更划算</li>
-              <li>适合高频文字对话</li>
-              <li>可体验生图能力</li>
-            </ul>
-            <a class="button" href="https://fe.dtyuedan.cn/item/n9e9af" target="_blank" rel="noopener">购买月卡</a>
+            <p class="plan-note">仅适合已确认可用的用户。不建议第一次购买。</p>
+            <a class="button" href="https://fe.dtyuedan.cn/item/n9e9af" target="_blank" rel="noopener">确认可用后购买</a>
           </article>
         </div>
-      </section>
-
-      <section class="section">
-        <div class="notice-grid">
-          <article class="notice warning">
-            <h3>GPT Image 2 生图说明</h3>
-            <p>
-              镜像入口已接入 GPT Image 2 API，支持文字生图和简单图片创作。但生图能力受模型排队、接口状态、网络环境和图片复杂度影响，速度可能较慢，也可能失败、超时或需要重试。购买后不代表每次都能稳定、快速出图。
-            </p>
-          </article>
-          <article class="notice official">
-            <h3>关于官方 ChatGPT Plus</h3>
-            <p>
-              镜像服务不等同于官方 ChatGPT Plus，在稳定性、功能完整度、账号体验和高峰期可用性上，通常不如官方 Plus。如果你能解决网络环境，建议优先使用官方 ChatGPT Plus。
-            </p>
-            <div class="official-actions">
-              <a class="button secondary" href="https://aipass.me" target="_blank" rel="noopener">前往 GPT Plus 充值站</a>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-title">
-          <h2>购买后怎么用</h2>
-          <p>流程尽量简单，有问题直接联系客服。</p>
-        </div>
-        <div class="steps">
-          <div class="step">
-            <strong>选择套餐</strong>
-            <span>按你的使用周期选择天卡、周卡或月卡。</span>
-          </div>
-          <div class="step">
-            <strong>完成购买</strong>
-            <span>跳转到购买页面，按提示完成下单。</span>
-          </div>
-          <div class="step">
-            <strong>获取入口</strong>
-            <span>购买后获取镜像入口或使用说明。</span>
-          </div>
-          <div class="step">
-            <strong>打开使用</strong>
-            <span>手机或电脑浏览器打开入口即可使用。</span>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-title">
-          <h2>适合这些需求</h2>
-          <p>镜像适合轻量和临时场景，不建议当作官方 Plus 的完整替代。</p>
-        </div>
-        <div class="feature-list">
-          <div class="feature">
-            <strong>日常对话</strong>
-            <span>问答、学习辅助、资料整理、灵感扩展。</span>
-          </div>
-          <div class="feature">
-            <strong>写作办公</strong>
-            <span>文案、邮件、总结、翻译、表格思路。</span>
-          </div>
-          <div class="feature">
-            <strong>代码辅助</strong>
-            <span>解释代码、排查思路、生成脚本草稿。</span>
-          </div>
-          <div class="feature">
-            <strong>图片创作</strong>
-            <span>头像、海报、商品图、配图等轻量生图。</span>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="support">
-          <div>
-            <strong>客服与售后</strong>
-            <p>镜像服务受网络与接口状态影响，如遇无法访问、生成失败、入口异常等情况，请联系客服处理。</p>
-          </div>
-          <div class="support-actions">
-            <button class="mini-button" type="button" id="copyWx">复制微信：Jiage01888</button>
-            <a class="mini-button" href="#plans" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;">查看套餐</a>
-          </div>
-        </div>
+        <p class="plan-warning">📌 第一次建议先买天卡测试<br>📌 生图不保证每次成功<br>📌 响应慢/失败请先自行重试<br>📌 适合能接受波动的轻量用户</p>
       </section>
 
       <footer class="footer">
-        本站提供镜像入口服务，不是 OpenAI 官方网站，也不等同于官方 ChatGPT Plus。若你需要更完整、更稳定的官方体验，建议使用官方 ChatGPT Plus。
+        📌 更适合能自行处理问题的用户。本站提供镜像入口服务，不是 OpenAI 官方网站，也不等同于官方 ChatGPT Plus。若你需要更完整、更稳定的官方体验，建议使用官方 ChatGPT Plus。
       </footer>
     </div>
   </main>
