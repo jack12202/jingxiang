@@ -311,6 +311,56 @@
       line-height: 1.7;
     }
 
+    .login-entry {
+      margin: 16px 0 0;
+      padding: 16px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(45, 212, 191, 0.38);
+      background:
+        linear-gradient(180deg, rgba(20, 184, 166, 0.16), rgba(255, 255, 255, 0.055)),
+        rgba(10, 25, 28, 0.72);
+    }
+
+    .login-entry h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+      color: #ccfbf1;
+    }
+
+    .login-entry p {
+      margin: 0;
+      color: #d5e7e9;
+      font-size: 0.92rem;
+      line-height: 1.65;
+    }
+
+    .login-url {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 6px 9px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      color: #ecfeff;
+      background: rgba(0, 0, 0, 0.16);
+      font-weight: 800;
+      word-break: break-all;
+    }
+
+    .login-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+
+    .login-actions .button,
+    .login-actions .mini-button {
+      width: auto;
+      min-width: 150px;
+      margin-top: 0;
+      padding: 0 14px;
+    }
+
     .button {
       display: inline-flex;
       align-items: center;
@@ -710,13 +760,16 @@
 
       .support,
       .support-actions,
-      .official-actions {
+      .official-actions,
+      .login-actions {
         flex-direction: column;
         align-items: stretch;
       }
 
       .support-actions .mini-button,
-      .official-actions .button {
+      .official-actions .button,
+      .login-actions .button,
+      .login-actions .mini-button {
         width: 100%;
       }
 
@@ -765,7 +818,7 @@
           <p>👉 需要稳定体验请用官方 Plus</p>
           <p>👉 能接受再继续使用</p>
           <div class="notice-actions">
-            <a class="button secondary" href="https://aipass.me" target="_blank" rel="noopener">前往官方 Plus（更稳定）</a>
+            <a class="button secondary" href="https://aipass.me" target="_blank" rel="noopener">前往充值官方 Plus</a>
             <a class="button" href="#plans">👉 我已了解镜像可能不稳定，继续使用</a>
           </div>
           <div class="service-boundary">
@@ -804,6 +857,15 @@
             <a class="button" href="https://fe.dtyuedan.cn/item/n9e9af" target="_blank" rel="noopener">确认可用后购买</a>
           </article>
         </div>
+        <div class="login-entry" aria-label="购买成功后登录入口">
+          <h3>购买成功后登录入口</h3>
+          <p>登录地址：<span class="login-url">https://chatshare.biz/</span></p>
+          <p>复制到浏览器打开，用购买成功后的账户密码登录。</p>
+          <div class="login-actions">
+            <button class="mini-button" type="button" id="copyLogin">复制登录地址</button>
+            <a class="button secondary" href="https://chatshare.biz/" target="_blank" rel="noopener">打开登录地址</a>
+          </div>
+        </div>
         <p class="plan-warning">📌 第一次建议先买天卡测试<br>📌 生图不保证每次成功<br>📌 响应慢/失败请先自行重试<br>📌 适合能接受波动的轻量用户</p>
       </section>
 
@@ -823,8 +885,10 @@
   <script>
     (function () {
       const WX_ID = 'Jiage01888';
+      const LOGIN_URL = 'https://chatshare.biz/';
       const toast = document.getElementById('toast');
       const copyWx = document.getElementById('copyWx');
+      const copyLogin = document.getElementById('copyLogin');
 
       function showToast(message) {
         if (!toast) return;
@@ -836,7 +900,7 @@
         }, 1500);
       }
 
-      async function copyText(text) {
+      async function copyText(text, label) {
         try {
           if (navigator.clipboard && navigator.clipboard.writeText) {
             await navigator.clipboard.writeText(text);
@@ -851,14 +915,18 @@
             document.execCommand('copy');
             input.remove();
           }
-          showToast('已复制微信：' + text);
+          showToast('已复制' + label + '：' + text);
         } catch (error) {
-          showToast('复制失败，请手动复制：' + text);
+          showToast('复制失败，请手动复制' + label + '：' + text);
         }
       }
 
       copyWx && copyWx.addEventListener('click', function () {
-        copyText(WX_ID);
+        copyText(WX_ID, '微信');
+      });
+
+      copyLogin && copyLogin.addEventListener('click', function () {
+        copyText(LOGIN_URL, '登录地址');
       });
     })();
   </script>
