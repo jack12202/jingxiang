@@ -313,31 +313,41 @@
 
     .login-entry {
       margin: 16px 0 0;
-      padding: 16px;
+      padding: 13px 16px;
       border-radius: var(--radius);
       border: 1px solid rgba(45, 212, 191, 0.38);
       background:
         linear-gradient(180deg, rgba(20, 184, 166, 0.16), rgba(255, 255, 255, 0.055)),
         rgba(10, 25, 28, 0.72);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
     }
 
     .login-entry h3 {
-      margin: 0 0 8px;
+      margin: 0;
       font-size: 1rem;
       color: #ccfbf1;
+      flex: 0 0 auto;
     }
 
-    .login-entry p {
+    .login-body {
+      min-width: 0;
+      flex: 1 1 auto;
+    }
+
+    .login-body p {
       margin: 0;
       color: #d5e7e9;
       font-size: 0.92rem;
-      line-height: 1.65;
+      line-height: 1.45;
     }
 
     .login-url {
       display: inline-block;
-      margin-top: 8px;
-      padding: 6px 9px;
+      margin-left: 5px;
+      padding: 5px 8px;
       border-radius: 10px;
       border: 1px solid var(--line);
       color: #ecfeff;
@@ -349,8 +359,9 @@
     .login-actions {
       display: flex;
       gap: 10px;
-      margin-top: 12px;
+      margin-top: 0;
       flex-wrap: wrap;
+      flex: 0 0 auto;
     }
 
     .login-actions .button,
@@ -761,6 +772,7 @@
       .support,
       .support-actions,
       .official-actions,
+      .login-entry,
       .login-actions {
         flex-direction: column;
         align-items: stretch;
@@ -859,8 +871,10 @@
         </div>
         <div class="login-entry" aria-label="购买成功后登录入口">
           <h3>购买成功后登录入口</h3>
-          <p>登录地址：<span class="login-url">https://chatshare.biz/</span></p>
-          <p>复制到浏览器打开，用购买成功后的账户密码登录。</p>
+          <div class="login-body">
+            <p>登录地址：<span class="login-url">https://chatshare.biz/</span></p>
+            <p>复制到浏览器打开，用购买成功后的账户密码登录。</p>
+          </div>
           <div class="login-actions">
             <button class="mini-button" type="button" id="copyLogin">复制登录地址</button>
             <a class="button secondary" href="https://chatshare.biz/" target="_blank" rel="noopener">打开登录地址</a>
